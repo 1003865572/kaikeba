@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script>
+
+      /*
+        使用 var 生命过的变量都会在函数的最顶部被声明一次，初始值都为 undefined
+      */
+      // var a = 1;
+      // var show = function() {
+      //   alert(a);
+      //   var a = 5;
+      // }
+      // show()
+      //------------------------------------------------------------------------
+      /*
+        let 不存在变量提升的情况，他的作用域是块级
+      */
+      // let a = 1;
+      // var show = function() {
+      //   alert(a);
+      //   let a = 5;
+      // }
+      // show()
+      // let a = 2;
+      // {
+      //   let a = 100;
+      //   alert(a)
+      // }
+      //------------------------------------------------
+      /*
+        const 定义常量，const 和 let 唯一的不同就是 const 不可修改
+        const vs let
+        相同点：有块及作用域，不会被变量提升
+        不同点：const 是常量，不可修改
+      */
+      // const a = 20;
+      // alert(a)
+
+      //------------------------------------------------
+      /*
+        结构赋值，接受不定参
+      */
+      // var [a, b, c] = '123'
+      // alert([a,b,c])
+
+      let show =  (...params) => {
+        let [a,b,c] = params[0]
+        console.log(a,c,b)
+      }
+      show('abc')
+
+
+    </script>
+  </body>
+</html>
