@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+      // ------------------------------------------------
+      // map 进来多少出去多少
+      let arr = [18, 67, 98, 12];
+      arr = arr.map(item => {})
+      // console.log(
+      //   arr
+      // )
+
+      // ------------------------------------------------
+      // reduce
+      let arr2 = [10, 20, 30, 40];
+      let avg = arr2.reduce((item, item2, i) => {
+        if (i >= arr2.length-1) {
+          return (item + item2) / arr2.length
+        }
+        return item + item2
+      })
+      console.log(avg)
+
+      //------------------------------------------------
+      // filter
+      let arr3 = [12,5,88,37,21,91,17,24]
+      console.log(
+        arr3.filter(item => {
+          return !item%2
+        })
+      )
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
