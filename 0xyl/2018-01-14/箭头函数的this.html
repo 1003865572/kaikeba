@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+    document.onclick=()=>{
+        let  a = ()=>{
+            alert(this);
+        }
+        let btn = document.getElementById('btn1');
+        btn.onclick = a.bind(12);
+    }
+    </script>
+  </head>
+  <body>
+        <input type="button" value="aaa" id="btn1">
+  </body>
+</html>
