@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+      //--------------------------------------------------------------------------------
+      //生成器
+      // let generator = function *gen(a) {
+      //   console.log(a)
+      //   let b = yield;
+      //   console.log(b)
+      // }
+      // let g = generator('aa')
+      // let next = {}
+      // next = g.next(1)
+      // console.log(next)
+      // while(next.done) {
+      //   g.next(1)
+      // }
+      //--------------------------------------------------------------------------------
+      // 循环 100次
+      let {name, b, c} = {name: 'blue', age: 18, size: 42}
+      console.log(name,b, c)
+
+      let generator = function *gen(a) {
+        for (let i= 0; i < 3; i++) {
+          let a = yield i;
+        }
+      }
+      let g = generator()
+      let next = g.next(1)
+      while(!next.done) {
+        next = g.next('50')
+        console.log(next)
+      }
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
