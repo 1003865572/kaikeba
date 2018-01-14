@@ -45,5 +45,5 @@ console.log(
     return !item%2
   })
 )
-[]
+// []
 ```

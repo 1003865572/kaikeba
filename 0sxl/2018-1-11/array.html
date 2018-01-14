@@ -6,35 +6,68 @@
     <script>
       // ------------------------------------------------
       // map 进来多少出去多少
-      let arr = [18, 67, 98, 12];
-      arr = arr.map(item => {})
-      // console.log(
-      //   arr
-      // )
-
-      // ------------------------------------------------
-      // reduce
-      let arr2 = [10, 20, 30, 40];
-      let avg = arr2.reduce((item, item2, i) => {
-        if (i >= arr2.length-1) {
-          return (item + item2) / arr2.length
-        }
-        return item + item2
-      })
-      console.log(avg)
-
-      //------------------------------------------------
-      // filter
+      // let arr = [18, 67, 98, 12];
+      // arr = arr.map(item => {})
+      // // console.log(
+      // //   arr
+      // // )
+      //
+      // // ------------------------------------------------
+      // // reduce
+      // let arr2 = [10, 20, 30, 40];
+      // let avg = arr2.reduce((item, item2, i) => {
+      //   if (i >= arr2.length-1) {
+      //     return (item + item2) / arr2.length
+      //   }
+      //   return item + item2
+      // })
+      // console.log(avg)
+      //
+      // //------------------------------------------------
+      // // filter 需要的是 true 或者 false, 来决定 要不要过滤掉这个 item
       let arr3 = [12,5,88,37,21,91,17,24]
+      // console.log(
+      //   arr3.filter(item => {
+      //     return !item%2
+      //   })
+      // )
       console.log(
-        arr3.filter(item => {
-          return !item%2
+        arr3.filter((item, i, a) => {
+          console.log(item, i )
+          return true
         })
       )
 
+      window.onload = () => {
+        var aDiv = document.getElementsByClassName('odiv')
+        document.onclick = () => {
+          // console.log(Array.from(aDiv))
+          // console.log(aDiv)
+          Array.from(aDiv).forEach(item => {
+            item.style.background="yellow"
+          })
+        }
+      }
+
     </script>
   </head>
+  <style>
+    .odiv{
+      width: 200px;
+      height: 200px;
+      background: #ccc;
+      float: left;
+      margin: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
   <body>
-
+    <div class="odiv">1</div>
+    <div class="odiv">2</div>
+    <div class="odiv">3</div>
+    <div class="odiv">4</div>
+    <div class="odiv">5</div>
   </body>
 </html>
