@@ -6,7 +6,12 @@
   }
   show('abc') // cba
 ```
-
+#### 结构，求输出结果
+```
+let {name, b, c} = {name: 'blue', age: 18, size: 42}
+console.log(name,b, c)
+blue, undefined, undefined
+```
 #### 两个函数能相等么
 ```
   let fn1 = function () {}
@@ -37,7 +42,7 @@ console.log(
 20 12
 21
 ```
-#### Array reduce ：输出结果是啥
+#### Array filter ：输出结果是啥
 ```
 let arr3 = [12,5,88,37,21,91,17,24]
 console.log(
