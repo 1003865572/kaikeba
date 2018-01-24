@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="./jquery.js"></script>
+    <script>
+      $(function() {
+        // 注册
+        var register = $('#register');
+        // 登录
+        var login = $('#login');
+
+        register.on('click', () => {
+          let username = $('#username').val();
+          let password = $('#password').val();
+          $.ajax({
+            url: `./register`,
+            method: 'get',
+            data: {
+              username,
+              password
+            },
+            dataType: 'json',
+            success: (data) => {
+              if (data.err !== 0) {
+                console.log(`注册失败: ${data.msg}`);
+              } else {
+                console.log(`注册成功`);
+              }
+            },
+            error: (err) => {
+              console.log('注册接口请求失败',err)
+            }
+          })
+        })
+
+        login.on('click', () => {
+          let username = $('#username').val();
+          let password = $('#password').val();
+          $.ajax({
+            url: `./login`,
+            method: 'post',
+            dataType: 'json',
+            data: {
+              username,
+              password
+            },
+            success: data => {
+              if (data.err !== 0) {
+                console.log(`登录失败: ${data.msg}`);
+              } else {
+                console.log('登录成功');
+              }
+            },
+            error: err => {
+              console.log('登录接口请求失败',err)
+            }
+          })
+        })
+
+      })
+    </script>
+  </head>
+  <body>
+    <input type="text" name="username" id="username" placeholder="username" /> <br />
+    <input type="password" name="password" id="password" placeholder="password" /> <br />
+    <input type="button" value="注册" id="register" /><br />
+    <input type="button" value="登录" id="login" />
+  </body>
+</html>
