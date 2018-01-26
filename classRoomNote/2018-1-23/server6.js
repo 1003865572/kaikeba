@@ -19,6 +19,9 @@ let server=http.createServer((req, res)=>{
   });
   req.on('end', ()=>{
     let post=querystring.parse(str);
+    console.log(
+      post
+    )
 
     let {user, pass}=query;
 
