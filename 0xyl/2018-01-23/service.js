@@ -3,12 +3,13 @@ const queryString = require('querystring');
 const fs = require('fs');
 const url = require('url');
 
-let users={
+const users=[];
+let service = http.createServer((req,rep)=>{
+    
+
     // userName : 'name',
     // pass : 'pass'
-};
 
-let service = http.createServer((req,rep)=>{
     //GET 参数
     let {pathname ,query} = url.parse(req.url,true);
     let {userName , pass} =query;
@@ -24,31 +25,32 @@ let service = http.createServer((req,rep)=>{
         console.log(obj);
         switch(pathname){
             case '/reg' : 
+            console.log(`进入 reg 方法`);
+            let {userName,pass} = obj;
                 let user = {
                     'userName' :  userName,
                     'pass' : pass
                 }
-                users[0] = user;
-                console.log(users);
+                users.push(user);
+                console.log('users : '+users.length);
                 rep.write(`in enter ${pathname}`);
                 rep.end();
                 break;
             case '/login' : {
-                console.log(`userName：${userName}`);
-                console.log(`pass：${pass}`);
-                let user = users[0];
-                if(userName && pass){
-                    if(user.userName == userName && user.pass == pass){
-                        rep.write(`in enter ${pathname}  success `);
+                    let {userName,pass} = queryString.parse(str);
+                    let postUser = users[0];
+                    if(userName && pass){
+                        if(postUser.userName == userName && postUser.pass == pass){
+                            rep.write(`in enter ${pathname}  success `);
+                        }else{
+                            rep.write(`in enter ${pathname}  error `);
+                        }
                     }else{
                         rep.write(`in enter ${pathname}  error `);
                     }
-                }else{
-                    rep.write(`in enter ${pathname}  error `);
+                    rep.end();
+                    break;
                 }
-                rep.end();
-            }
-                break;
             case '/getfrom' : 
                 fs.readFile('www/getfrom.html',(err,data)=>{
                     if(err){
@@ -95,6 +97,7 @@ let service = http.createServer((req,rep)=>{
                     }
                     rep.end();
                 });
+                console.log(`default 模块`);
         }
     });
 });
