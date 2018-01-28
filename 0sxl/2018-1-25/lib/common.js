@@ -10,5 +10,3 @@ Buffer.prototype.split = Buffer.prototype.split || function (b) {
   arr.push(this.slice(curr));
   return arr;
 }
-
-// let b = new Buffer.from('aaa+bbb+ccc+ddd');

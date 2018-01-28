@@ -18,9 +18,14 @@ let server = http.createServer((req, res) => {
           let boundary = req.headers['content-type'];
           boundary = `--${boundary.split('=')[1]}`
 
+          // 1. 用"分隔符切分整个数据"
           data = data.split(boundary);
+
+          // 2. 丢弃头尾两个数据
           data.shift()
           data.pop()
+
+          // 3. 丢掉每个数据头尾的 \r\n
           data.map(item => {
             console.log(item.toString())
           })
