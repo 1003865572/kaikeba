@@ -1,14 +1,30 @@
-Buffer.prototype.split=Buffer.prototype.split||function (b){
-  let arr=[];
+// Buffer.prototype.split=Buffer.prototype.split||function (b){
+//   let arr=[];
+//
+//   let cur=0;
+//   let n=0;
+//   while((n=this.indexOf(b, cur))!=-1){
+//     arr.push(this.slice(cur, n));
+//     cur=n+b.length;
+//   }
+//
+//   arr.push(this.slice(cur));
+//
+//   return arr;
+// };
 
-  let cur=0;
-  let n=0;
-  while((n=this.indexOf(b, cur))!=-1){
+Buffer.prototype.split = Buffer.prototype.split || function(b) {
+  let arr = [];
+
+  let cur = 0;
+  let n = 0;
+
+  while ((n = this.indexOf(b, curr)) !== -1) {
     arr.push(this.slice(cur, n));
-    cur=n+b.length;
+    cur = n+b.length;
   }
 
-  arr.push(this.slice(cur));
+  arr.push(this.slice(curr));
 
   return arr;
-};
+}
