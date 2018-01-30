@@ -68,7 +68,6 @@ let server=http.createServer((req, res)=>{
 
             filename=filename.split('=')[1];
             filename=filename.substring(1,filename.length-1);
-
             let path=`upload/${uuid().replace(/\-/g, '')}`;
 
             fs.writeFile(path, content, err=>{
