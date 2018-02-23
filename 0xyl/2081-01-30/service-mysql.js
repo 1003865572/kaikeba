@@ -9,7 +9,7 @@ let db = mysql.createPool({host:'127.0.0.1', prot : '3306', user :'root',passwor
 
 let service = http.createServer((req,rep)=>{
     
-    try{
+   
 
     let {pathname,query} = url.parse(req.url,true);
     let {user,pass} = query;
@@ -25,7 +25,7 @@ let service = http.createServer((req,rep)=>{
             break;
     }
 
-
+    try{
         let files = fs.createReadStream(`www/${pathname}`);
         rep.setHeader('content-encoding', 'gzip');
     
