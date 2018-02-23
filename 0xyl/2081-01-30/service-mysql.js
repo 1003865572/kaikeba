@@ -4,7 +4,7 @@ const mysql = require('mysql');
 // const crypot = require('crypot');
 const zlib = require('zlib');
 const fs = require('fs');
-let gz = zlib.createGzip();
+
 let db = mysql.createPool({host:'127.0.0.1', prot : '3306', user :'root',password:'',database:'test'});
 
 let service = http.createServer((req,rep)=>{
@@ -25,21 +25,22 @@ let service = http.createServer((req,rep)=>{
             break;
     }
 
-    try{
+    
         let files = fs.createReadStream(`www/${pathname}`);
         rep.setHeader('content-encoding', 'gzip');
-    
+        let gz = zlib.createGzip();
         files.pipe(gz).pipe(rep);
         
         files.on('error',err=>{
-            console.log(`文件流error${err}`);
-            rep.writeHead(404);
-            rep.write('Not Found');
-            rep.end();
+            console.log(err);
+            // if(err){
+            //     console.log(`文件流error${err}`);
+            //     rep.writeHead(404);
+            //     rep.write('Not Found');
+            //     rep.end();
+            // }
         });
-    }catch (e){
-        console.log(`catch捕获到的异常：${e}`);
-    }
+
 
     
 });
