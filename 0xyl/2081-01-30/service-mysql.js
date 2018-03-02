@@ -4,12 +4,10 @@ const mysql = require('mysql');
 // const crypot = require('crypot');
 const zlib = require('zlib');
 const fs = require('fs');
-let gz = zlib.createGzip();
+
 let db = mysql.createPool({host:'127.0.0.1', prot : '3306', user :'root',password:'',database:'test'});
 
 let service = http.createServer((req,rep)=>{
-    
-    try{
 
     let {pathname,query} = url.parse(req.url,true);
     let {user,pass} = query;
@@ -25,15 +23,18 @@ let service = http.createServer((req,rep)=>{
             break;
     }
 
-
+    try{
+        if(pathname.length <= 1){
+            pathname = '/1.html';
+        }
         let files = fs.createReadStream(`www/${pathname}`);
         rep.setHeader('content-encoding', 'gzip');
-    
+        let gz = zlib.createGzip();
         files.pipe(gz).pipe(rep);
         
         files.on('error',err=>{
             console.log(`文件流error${err}`);
-            rep.writeHead(404);
+            rep.writeHeader(404);
             rep.write('Not Found');
             rep.end();
         });
@@ -44,3 +45,4 @@ let service = http.createServer((req,rep)=>{
     
 });
 service.listen(8080);
+
