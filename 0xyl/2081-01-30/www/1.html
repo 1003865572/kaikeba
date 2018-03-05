@@ -8,6 +8,7 @@
     <script src="jquery.js"></script>
     <script>
     $(function(){
+        
         $('#bnt1').click(function(){
             $.ajax({
                 url:'/req',
@@ -18,14 +19,29 @@
                 type:'get',
                 dataType:'json',
                 success : function(json){
-                    alert(json);
+                    alert(json.msg);
                 },
                 error : function(err){
-                    alert(err);
+                    alert(`失败`+err.responseText);
                 }
             });
-        })
-    });
+        });
+        // $('#btn2').click(function(){
+        //     $.ajax({
+        //         url : '/login',
+        //         data :{
+        //             user : $('#user').val(),
+        //             pass : $('#pass').val()
+        //         },
+        //         dataType : 'json',
+        //         success : function(data){
+        //             alert(data);
+        //         },error : function(data){
+        //             alert(data);
+        //         }
+        //     })
+        // });
+    })
     </script>
 </head>
 <body>
