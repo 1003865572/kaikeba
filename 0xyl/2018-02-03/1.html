@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ws</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+    <style>
+        .msg_ul{
+            border: 1px solid black;
+            width :300px;
+            height:400px;
+            list-style: none;
+        }
+        #msg_text {
+            width: 300px;
+            height:100px;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            let socket = io.connect('ws://localhost:8080');
+            socket.on('msg',(data)=>{
+                console.log(data);
+            });
+            let btn = document.getElementById('btn');
+            let msg_text = document.getElementById('msg_text');
+
+            btn.onclick = function (){
+                socket.emit('msg',msg_text.value);
+            }
+        }
+    </script>
+</head>
+<body>
+    <ul class="msg_ul">
+        <li></li>
+    </ul>
+    <textarea id="msg_text"></textarea>
+    <button id="btn">提交</button>
+</body>
+</html>
