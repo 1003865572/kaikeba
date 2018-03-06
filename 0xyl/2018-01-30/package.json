@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "mysql": "^2.15.0"
+  },
+  "devDependencies": {
+    "socket.io": "^2.0.4"
   }
 }
