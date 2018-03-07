@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>翻书</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        .book{
+            width: 600px;
+            margin: 100px auto 0;
+            height: 400px;
+            border: 1px solid black;
+            transform: perspective(700px) rotateX(30deg);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        .book:active .page2{
+            transform: rotateY(-180deg);
+        }
+        .book .page{
+            position: absolute;
+            transform-origin: left;
+            width: 300px;
+            height: 400px;
+            left: 0;
+            top: 0;
+            text-align: center;
+            line-height: 400px;
+            transition: 1s all ease;
+        }
+        .page2, .page3{
+            left: auto !important;
+            right: 0 !important;
+        }
+        .page2{
+            width: 300px;
+        }
+
+        .page2 div{
+            width: 300px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 1px solid red;
+        }
+        .page2 div:nth-child(1){
+            
+        }
+        .page2 div:nth-child(2){}
+    </style>
+</head>
+<body>
+    <div>
+        <div class="book">
+            <div class="page page1">page1</div>
+            <div class="page page2">
+                <div>page2</div>
+                <div>page3</div>
+            </div>
+            <div class="page page3">page4</div>
+        </div>
+    </div>
+</body>
+</html>
