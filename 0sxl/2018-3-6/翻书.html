@@ -23,11 +23,11 @@
             position: absolute;
             transform-origin: left;
             width: 300px;
-            height: 400px;
+            height: 396px;
             left: 0;
             top: 0;
             text-align: center;
-            line-height: 400px;
+            line-height: 396px;
             transition: 1s all ease;
         }
         .page2, .page3{
@@ -36,20 +36,25 @@
         }
         .page2{
             width: 300px;
+            transform-style: preserve-3d;
         }
 
         .page2 div{
             width: 300px;
-            height: 400px;
+            height: 396px;
             position: absolute;
             top: 0;
             left: 0;
             border: 1px solid red;
         }
         .page2 div:nth-child(1){
-            
+            background: red;
+            transform: translateZ(1px);
         }
-        .page2 div:nth-child(2){}
+        .page2 div:nth-child(2){
+            background: #ccc;
+            transform: translateZ(-1px) scaleX(-1);
+        }
     </style>
 </head>
 <body>
