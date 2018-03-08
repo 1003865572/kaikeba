@@ -10,10 +10,36 @@
         .parent{
             transform: perspective(700px) rotateX(0) rotateY(0);
             transform-style: preserve-3d;
-            transition: 5s all ease;
+            transition: 2s all ease;
             width:200px;
             height:200px;
             border: 1px solid black;
+            margin:150px auto 0;
+            position:relative;
+        }
+        .parent:hover{
+            transform: rotateY(180deg);
+        }
+        .parent div.front{
+            position:absolute;
+            left:0;
+            top: 0;
+            width:200px;
+            height:200px;
+            background:rgba(0, 255, 0, 1);
+            transform:translateZ(10px);
+            text-align:center;
+            line-height:200px;
+        }
+        .parent div.back{
+            left:0;
+            top: 0px;
+            position:absolute;
+            width:200px;
+            height:200px;
+            background:rgba(255, 255, 100, 1);
+            text-align:center;
+            line-height:200px;
         }
     </style>
 <body>
@@ -22,4 +48,14 @@
         <div class="back">后</div>
     </div>
 </body>
+<script>
+    let front = document.getElementsByClassName('front')[0];
+    front.onclick= function name() {
+        alert('前');
+    }
+    let back = document.getElementsByClassName('back')[0];
+    back.onclick = function(){
+        alert('后');
+    }
+</script>
 </html>
