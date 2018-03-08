@@ -16,17 +16,17 @@ let httpServer = http.createServer((req, res) => {
             console.log('登录')
         break;
         default: 
-            let rs = fs.createReadStream(`www${pathname}`);
-            let gz = zlib.createGzip();
-            res.setHeader('content-encoding', 'gzip')
+            let rs=fs.createReadStream(`www${pathname}`);
+            let gz=zlib.createGzip();
+    
+            res.setHeader('content-encoding', 'gzip');
             rs.pipe(gz).pipe(res);
-            
-            rs.on('error', () => {
-                console.log(pathname);
-                res.writeHeader(404);
-                res.write('Not Found');
-                res.end();
-            })
+    
+            rs.on('error', err=>{
+            res.writeHeader(404);
+            res.write('Not Found');
+            res.end();
+            });
     }
 })
 

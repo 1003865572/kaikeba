@@ -11,31 +11,43 @@
       let oBtn=document.getElementById('btn1');
 
       oBtn.onclick=function (){
-        let data=new FormData();
-
-        data.set('user', oUser.value);
-        data.set('pass', oPass.value);
-
-        Array.from(oF.files).forEach(file=>{
-          data.append('f1', file);
-        });
-
-        //
-        let oAjax=new XMLHttpRequest();
-
-        //POST
-        oAjax.open('POST', `http://localhost:8080/api`, true);
-        oAjax.send(data);
-
-        oAjax.onreadystatechange=function (){
-          if(oAjax.readyState==4){
-            if(oAjax.status>=200 && oAjax.status<300 || oAjax.status==304){
-              alert('成功');
-            }else{
-              alert('失败');
-            }
+        let url = `http://localhost:8080/api`;
+        let option = {
+          method: 'POST',
+          body: {
+            user: oUser.value,
+            pass: oPass.value
           }
-        };
+        }
+        fetch(url,option).then(res => {
+          console.log(res.text())
+        })
+
+        // let data=new FormData();
+
+        // data.set('user', oUser.value);
+        // data.set('pass', oPass.value);
+
+        // Array.from(oF.files).forEach(file=>{
+        //   data.append('f1', file);
+        // });
+
+        // //
+        // let oAjax=new XMLHttpRequest();
+
+        // //POST
+        // oAjax.open('POST', `http://localhost:8080/api`, true);
+        // oAjax.send(data);
+
+        // oAjax.onreadystatechange=function (){
+        //   if(oAjax.readyState==4){
+        //     if(oAjax.status>=200 && oAjax.status<300 || oAjax.status==304){
+        //       alert('成功');
+        //     }else{
+        //       alert('失败');
+        //     }
+        //   }
+        // };
       };
     };
     </script>
