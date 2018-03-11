@@ -28,13 +28,13 @@
         }
         .page_content{
             position: relative;
-            background: #CCC;
         }
         .banner {
             width: 67rem;
             height:21rem;
             position:relative;
             overflow: hidden;
+            top: -5rem;
         }
         .banner ul{
             height:21rem;
@@ -75,6 +75,13 @@
             border: 1px solid #d0a793;
             opacity: 1;
         }
+        .refresh {
+            height: 5rem;
+            font-size: 2.5rem;
+            text-align: center;
+            width: 67rem;
+            line-height: 5rem;
+        }
     </style>
 </head>
 <body>
@@ -82,6 +89,9 @@
         <h1>淘宝网</h1>
     </header>
     <div class="page_content">
+        <div class="refresh">
+            下拉刷新
+        </div>
         <section class="banner">
             <ul>
                 <li><img src="./img/banner1.jpg" ></li>
@@ -113,6 +123,7 @@
         let banner = document.querySelector('.banner');
         let bannerUl = banner.children[0];
         let page_content = document.querySelector('.page_content');
+        let ol = document.querySelectorAll('.banner ol li');
 
         let x = 0,y = 0;
         
@@ -121,12 +132,27 @@
             let startX = ev.targetTouches[0].clientX;
             let startY = ev.targetTouches[0].clientY;
             
-            let disX=startX-x;
+            let disX = startX - x;
 
             function fnmove(ev) {
                 x = ev.targetTouches[0].clientX - disX;
+                //x : 鼠标移动位置 因为是负数，所以x前面加一个 “-”号  负负为正 得到的就是一个正数。
+                //bannerUl.children[0].offsetWidth 获取UL下第一个元素的宽度（其实所有元素宽度都一样），让 X 除以它 获取的就是当前鼠标拖动到了第几个元素
+                let n = Math.round(-x/bannerUl.children[0].offsetWidth);
+                // n ：上面获取到的页面上显示到了第几个元素，那么接下来用 n 乘以 ul下元素的宽度，就的处理 当前元素的 最左边的一个值，
+                //然后吧这个数值 变为负数就是我们想要的X 的值了
+                x = -n * bannerUl.children[0].offsetWidth;
+                bannerUl.style.transition = '0.5s all ease';
                 bannerUl.style.transform = `translateX(${x}px)`;
-                console.log(x);
+                
+                console.log(n);
+                Array.from(ol).forEach((li,index)=>{
+                    if(index == n){
+                        li.className = 'active';
+                    }else{
+                        li.className = '';
+                    }
+                });
             }
             function fnend(ev) {
                 banner.removeEventListener('touchmove',fnmove,false);
