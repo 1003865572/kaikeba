@@ -88,10 +88,11 @@
     <header>
         <h1>淘宝网</h1>
     </header>
-    <div class="page_content">
-        <div class="refresh">
+    <div class="refresh">
             下拉刷新
         </div>
+    <div class="page_content">
+        
         <section class="banner">
             <ul>
                 <li><img src="./img/banner1.jpg" ></li>
@@ -119,7 +120,7 @@
     window.onresize();
 
     window.onload = function(){
-
+        let page = document.getElementsByClassName('page_content')[0];
         let banner = document.querySelector('.banner');
         let bannerUl = banner.children[0];
         let page_content = document.querySelector('.page_content');
@@ -133,19 +134,40 @@
             let startY = ev.targetTouches[0].clientY;
             
             let disX = startX - x;
-
+            let disY = startY - y;
+            let dir = '';
+            let n = 0;
             function fnmove(ev) {
-                x = ev.targetTouches[0].clientX - disX;
-                //x : 鼠标移动位置 因为是负数，所以x前面加一个 “-”号  负负为正 得到的就是一个正数。
-                //bannerUl.children[0].offsetWidth 获取UL下第一个元素的宽度（其实所有元素宽度都一样），让 X 除以它 获取的就是当前鼠标拖动到了第几个元素
-                let n = Math.round(-x/bannerUl.children[0].offsetWidth);
-                // n ：上面获取到的页面上显示到了第几个元素，那么接下来用 n 乘以 ul下元素的宽度，就的处理 当前元素的 最左边的一个值，
-                //然后吧这个数值 变为负数就是我们想要的X 的值了
-                x = -n * bannerUl.children[0].offsetWidth;
-                bannerUl.style.transition = '0.5s all ease';
-                bannerUl.style.transform = `translateX(${x}px)`;
-                
-                console.log(n);
+                //方向定位
+                if(dir == ''){
+                     if(Math.abs(ev.targetTouches[0].clientX - startX) > 5){
+                         dir = 'x';
+                     }else if(Math.abs(ev.targetTouches[0].clientY) > 5){
+                         dir = 'y';
+                     }
+                }else{
+                    if(dir == 'x'){
+                        x = ev.targetTouches[0].clientX - disX;
+                        //x : 鼠标移动位置 因为是负数，所以x前面加一个 “-”号  负负为正 得到的就是一个正数。
+                        //bannerUl.children[0].offsetWidth 获取UL下第一个元素的宽度（其实所有元素宽度都一样），让 X 除以它 获取的就是当前鼠标拖动到了第几个元素
+                        n = Math.round(-x/bannerUl.children[0].offsetWidth);
+                        // n ：上面获取到的页面上显示到了第几个元素，那么接下来用 n 乘以 ul下元素的宽度，就的处理 当前元素的 最左边的一个值，
+                        //然后吧这个数值 变为负数就是我们想要的X 的值了
+                        x = -n * bannerUl.children[0].offsetWidth;
+                        bannerUl.style.transition = '0.5s all ease';
+                        bannerUl.style.transform = `translateX(${x}px)`;
+                    }else{
+                        y = ev.targetTouches[0].clientY - disY;
+                        page.style.transition = '';
+                        page.style.transform = `translateY(${y}px)`;
+                    }
+                }
+                console.log(dir);
+            }
+            function fnend(ev) {
+                banner.removeEventListener('touchmove',fnmove,false);
+                banner.removeEventListener('touchend',fnend,false);
+                console.log(`end事件`);
                 Array.from(ol).forEach((li,index)=>{
                     if(index == n){
                         li.className = 'active';
@@ -153,10 +175,11 @@
                         li.className = '';
                     }
                 });
-            }
-            function fnend(ev) {
-                banner.removeEventListener('touchmove',fnmove,false);
-                banner.removeEventListener('touchend',fnend,false);
+                if(y > 0){
+                    y = 0;
+                    page.style.transition = '0.5s all ease';
+                    page.style.transform = 'translateY(0px)';
+                }
                 
             }
             banner.addEventListener('touchmove',fnmove,false);
