@@ -2,15 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>淘宝首页</title>
     <meta name="viewport" content="width=device-width">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <style>
         * {margin:0; padding:0; list-style:none;}
         html { font-size: 10px; }
         header {
-            width: 67rem;
+            width: 48rem;
             height: 5.5rem;
             background: #fe5400;
             overflow: hidden;
@@ -30,7 +28,7 @@
             position: relative;
         }
         .banner {
-            width: 67rem;
+            width: 48rem;
             height:21rem;
             position:relative;
             overflow: hidden;
@@ -43,7 +41,7 @@
             transform:translateX(0rem);
         }
         .banner ul li {
-            width: 67rem;
+            width: 48rem;
             height: 21rem;
             float: left;
             margin: 0;
@@ -79,7 +77,7 @@
             height: 5rem;
             font-size: 2.5rem;
             text-align: center;
-            width: 67rem;
+            width: 48rem;
             line-height: 5rem;
         }
     </style>
@@ -92,7 +90,7 @@
             下拉刷新
         </div>
     <div class="page_content">
-        
+
         <section class="banner">
             <ul>
                 <li><img src="./img/banner1.jpg" ></li>
@@ -118,7 +116,6 @@
       document.documentElement.style.fontSize=document.documentElement.clientWidth/48+'px';
     };
     window.onresize();
-
     window.onload = function(){
         let page = document.getElementsByClassName('page_content')[0];
         let refresh = document.getElementsByClassName('refresh')[0];
@@ -128,12 +125,17 @@
         let ol = document.querySelectorAll('.banner ol li');
 
         let x = 0,y = 0;
-        
+
+        document.addEventListener('touchmove', (e) => {
+          e.preventDefault();
+          return false
+        }, false)
+
         banner.addEventListener('touchstart', function (ev){
-           
+
             let startX = ev.targetTouches[0].clientX;
             let startY = ev.targetTouches[0].clientY;
-            
+
             let disX = startX - x;
             let disY = startY - y;
             let dir = '';
@@ -188,7 +190,7 @@
                     page.style.transition = '0.5s all ease';
                     page.style.transform = 'translateY(0px)';
                 }
-                
+
             }
             banner.addEventListener('touchmove',fnmove,false);
             banner.addEventListener('touchend',fnend,false);
