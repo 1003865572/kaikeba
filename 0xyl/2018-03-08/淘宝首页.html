@@ -121,6 +121,7 @@
 
     window.onload = function(){
         let page = document.getElementsByClassName('page_content')[0];
+        let refresh = document.getElementsByClassName('refresh')[0];
         let banner = document.querySelector('.banner');
         let bannerUl = banner.children[0];
         let page_content = document.querySelector('.page_content');
@@ -158,6 +159,12 @@
                         bannerUl.style.transform = `translateX(${x}px)`;
                     }else{
                         y = ev.targetTouches[0].clientY - disY;
+                        if( y > 100){
+                            refresh.innerHTML = '松手刷新';
+                        }else{
+                            refresh.innerHTML = '下拉刷新';
+                        }
+                        y = y /3;
                         page.style.transition = '';
                         page.style.transform = `translateY(${y}px)`;
                     }
@@ -177,6 +184,7 @@
                 });
                 if(y > 0){
                     y = 0;
+                    refresh.innerHTML = '下拉刷新';
                     page.style.transition = '0.5s all ease';
                     page.style.transform = 'translateY(0px)';
                 }
