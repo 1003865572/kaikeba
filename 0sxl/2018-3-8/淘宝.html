@@ -6,12 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>淘宝1</title>
     <style>
-        
+        *{margin: 0; padding: 0;}
+        html{font-size: 10px;}
+        header{
+          background: #eee;
+        }
+        header h1 {
+          text-indent: -9999px;
+          width:4.4rem;
+          height:3.7rem;
+          background: #ccc;
+        }
     </style>
+    <script type="text/javascript">
+      window.onresize = function() {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 48 + 'px';
+      }
+      window.onresize();
+    </script>
 </head>
 <body>
     <div class="app">
-        <header></header>
+        <header>
+          <h1>淘</h1>
+        </header>
         <div class="body">
             <section class="banner">
 
