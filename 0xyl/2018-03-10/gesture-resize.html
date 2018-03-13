@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>gesture</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body{
+            height:2000px;
+        }
+        div {
+            width: 200px;
+            height:200px;
+            background:aqua;
+            margin: 150px auto 0;
+            border: 1px solid black;
+            position: absolute;
+            line-height:200px;
+            text-align:center;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">123wd</div>
+</body>
+<script>
+    function calcDistance(touch1,touch2) {
+        let x = Math.pow(touch1.clientX - touch2.clientX , 2);
+        let y = Math.pow(touch1.clientY - touch2.clientY , 2);
+        Math.sqer(x , y);
+    }
+    window.onload = function (){
+        let box = document.getElementsByClassName('.box')[0];
+        document.addEventListener('touchstart',function (ev){
+            console.log(ev.targetTouches.length);
+            if(ev.targetTouches.length > 2){
+
+            }
+        },false);
+    }
+</script>
+</html>
