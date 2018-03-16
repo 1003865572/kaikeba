@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=0,maximum-scale=0,user-scalable=no">
+    <title>taobao</title>
+    <style media="screen">
+      *{margin: 0; padding: 0;}
+      .app{
+        width: 48rem;
+      }
+      header{
+        width: 48rem; height: 6rem; background: #ccc; overflow: hidden;
+      }
+      header h1{
+        text-indent: -999rem; background: #eee; width: 5rem; height: 5rem; margin-top: .5rem; margin-left: .5rem;
+      }
+      .banner{ width: 48rem; height: 16rem; background: #eee; position: relative; overflow: hidden;}
+      .banner ol { position: absolute; right: 1rem; bottom: 1rem; z-index: 2;  }
+      .banner ol li { display: inline-block; width: .8rem; height: .8rem; background: #eee; border-radius: 50%; border: 1px solid #000; margin: 0 .2rem}
+      .banner ol li.active{ background: red; }
+      .banner ul { width: 999rem; height: 16rem; }
+      .banner ul li { display: inline-block; width: 48rem; height: 16rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+
+
+
+    </style>
+    <script type="text/javascript">
+      window.onresize = function () {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 48 + 'px';
+      }
+      window.onresize();
+
+      window.onload = function () {
+        let banner = document.querySelector('.banner ul');
+        let bannerIndex = document.querySelector('.banner ol');
+        console.log(banner)
+        console.log(bannerIndex)
+
+        banner.addEventListener('touchstart', ev => {
+          let disX = 0;
+          let disY = 0;
+
+
+        }, false)
+      }
+    </script>
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>淘</h1>
+      </header>
+      <div class="banner">
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+        </ul>
+        <ol>
+          <li class="active"></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </div>
+
+  </body>
+</html>
