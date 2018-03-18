@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    body {background:black; text-align: center;}
+    #c1 {background:#FFF}
+    </style>
+    <script>
+    window.onload=function (){
+      let oC=document.getElementById('c1');
+      let gd=oC.getContext('2d');
+
+      gd.moveTo(100, 100);
+      gd.lineTo(200, 200);
+      gd.strokeStyle='red';
+      gd.stroke();
+
+      //
+      gd.beginPath();         //清楚之前的一切路径，重新开始
+      gd.moveTo(300, 100);
+      gd.lineTo(400, 200);
+      gd.strokeStyle='yellow';
+      gd.stroke();
+    };
+    </script>
+  </head>
+  <body>
+    <canvas id="c1" width="800" height="600"></canvas>
+  </body>
+</html>
