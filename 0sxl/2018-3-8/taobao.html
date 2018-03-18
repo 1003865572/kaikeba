@@ -10,7 +10,7 @@
         width: 48rem;
       }
       header{
-        width: 48rem; height: 6rem; background: #ccc; overflow: hidden;
+        width: 48rem; height: 6rem; background: #ccc; overflow: hidden; position: relative; z-index: 2
       }
       header h1{
         text-indent: -999rem; background: #eee; width: 5rem; height: 5rem; margin-top: .5rem; margin-left: .5rem;
@@ -58,6 +58,8 @@
               }
               banner.style.transform = `translateX(${x}px)`;
               if (y > 0) {
+                app.style.transform = `translateY(${y/3}px)`;
+              } else {
                 app.style.transform = `translateY(${y}px)`;
               }
             }
@@ -68,7 +70,7 @@
             banner.removeEventListener('touchend', endFn, false);
             y = 0;
             app.style.transform = `translateY(0)`;
-            app.style.transition = 'all 1s'
+            app.style.transition = 'all .3s'
           }
 
           banner.addEventListener('touchmove', moveFn, false);
