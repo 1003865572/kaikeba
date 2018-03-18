@@ -34,16 +34,11 @@
         let bannerIndex = document.querySelector('.banner ol');
         let app = document.querySelector('.app');
         let x=0,y=0;
-        document.addEventListener('touchmove', ev => {
-          ev.preventDefault()
-          return false;
-        }, false)
 
         banner.addEventListener('touchstart', ev => {
           const {clientX: startX, clientY: startY} = ev.targetTouches[0]
           let disX = startX - banner.offsetLeft - x;
           let disY = startY - banner.offsetTop;
-          app.style.transition = 'none'
 
           let dix = ''
           const moveFn = (ev) => {
@@ -58,6 +53,7 @@
               if (dix === 'x') {
                 x = clientX - disX;
               } else if (dix === 'y') {
+                app.style.transition = 'none'
                 y = clientY - disY;
               }
               banner.style.transform = `translateX(${x}px)`;
