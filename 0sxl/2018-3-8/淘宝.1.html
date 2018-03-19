@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+        <meta http-equiv="X-UA-Compatibe" content="ie=edge">
+        <title>xx</title>
+        <style>
+            *{margin: 0; padding: 0;}
+            html{font-size: 10px;}
+            .app{ width: 48rem;}
+            header {width:48rem;height:5.5rem;background:#ccc; overflow:hidden; position:relative; z-index:99;}
+            header h1 {width:4.4rem; height:3.7rem; background:#eee no-repeat; text-indent:-9999rem; background-size:100% 100%; margin-left:0.6rem; margin-top:1rem;}
+        </style>
+        <script>
+          window.onresize = function() {
+            let fontSize = document.documentElement.clientWidth / 48 + 'px';
+            document.documentElement.style.fontSize = fontSize;
+          }
+          window.onresize();
+        </script>
+    </head>
+    <body>
+      <div class="app">
+        <header class="header">
+          <h1>掏</h1>
+        </header>
+      </div>
+    </body>
+</html>

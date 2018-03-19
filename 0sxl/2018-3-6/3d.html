@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /*
+            transform-style:    设置文档布局的方式( 必须定义在父及 )
+            perspective:        透视
+            rotate:             空间旋转XYZ
+            translate:          空间坐标移动
+        */
+        .parent {
+            transform-style: preserve-3d;
+            transform: perspective(700px) rotateX(0deg) rotateY(0deg);
+            background: #000;
+            width: 200px;
+            height: 200px;
+            transition: 3s all ease;
+            margin: 150px auto 0;
+            position: relative;
+        }
+        .parent:active{
+            transform: perspective(700px) rotateX(360deg) rotateY(180deg);
+        }
+        .parent div{
+            position: absolute;
+            width: 198px;
+            height: 198px;
+            top: 0;
+            left: 0;
+            border: 1px solid red;
+            background: rgba(0,0,0,.2)
+        }
+        .front{
+            transform: translateZ(100px);
+        }
+        .back{
+            transform: translateZ(-100px);
+        }
+        .left{
+            transform: rotateY(90deg) translateZ(100px);
+        }
+        .right{
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+        .top{
+            transform: rotateX(90deg) translateZ(100px);
+        }
+        .bottom{
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="front">前</div>
+        <div class="back">后</div>
+        <div class="left">左</div>
+        <div class="right">右</div>
+        <div class="top">上</div>
+        <div class="bottom">下</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    .box {width:400px; height:400px; background:#CCC; margin:100px auto 0;}
+    </style>
+    <script src="hammer.js" charset="utf-8"></script>
+    <script>
+    window.onload=function (){
+      let oBox=document.querySelector('.box');
+
+      let hammer=new Hammer(oBox);
+
+      hammer.on('panstart', ev=>{
+        console.log('panstart');
+      });
+      hammer.on('panmove', ev=>{
+        console.log('panmove');
+      });
+      hammer.on('panend', ev=>{
+        console.log('panend');
+      });
+      hammer.on('pancancel', ev=>{
+        console.log('pancancel');
+      });
+    };
+    </script>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>拖拽</title>
+    <style media="screen">
+      .box{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        background: #ccc;
+        height: 100px;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = () => {
+        let oBox = document.querySelector('.box');
+        oBox.addEventListener('touchstart', (e) => {
+          const { clientX, clientY } = e.targetTouches[0];
+          let disX = clientX - oBox.offsetLeft;
+          let disY = clientY - oBox.offsetTop;
+
+          const fnMove = e => {
+            const { clientX, clientY } = e.targetTouches[0];
+            oBox.style.left = clientX - disX + 'px';
+            oBox.style.top = clientY - disY + 'px';
+          }
+          const fnEnd = e => {
+            oBox.removeEventListener('touchmove', fnMove, false);
+            oBox.removeEventListener('touchend', fnEnd, false)
+          }
+          oBox.addEventListener('touchmove', fnMove, false);
+          oBox.addEventListener('touchend', fnEnd, false);
+
+        }, false)
+      }
+    </script>
+  </head>
+  <body>
+    <div class="box">
+
+    </div>
+  </body>
+</html>

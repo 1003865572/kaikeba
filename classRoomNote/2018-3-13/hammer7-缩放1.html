@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    .box {width:400px; height:400px; background:#CCC; margin:100px auto 0;}
+    </style>
+    <script src="hammer.js" charset="utf-8"></script>
+    <script>
+    window.onload=function (){
+      let oBox=document.querySelector('.box');
+      let scale=0,old_scale;
+
+      let hammer=new Hammer(oBox);
+
+      hammer.get('pinch').set({enable: true});
+      hammer.on('pinchstart', ev=>{
+        old_scale=scale;
+      });
+      hammer.on('pinchmove', ev=>{
+        scale=old_scale*ev.scale;
+
+        oBox.style.transform=`scale(${scale})`;
+      });
+      hammer.on('pinchend', ev=>{});
+    };
+    </script>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

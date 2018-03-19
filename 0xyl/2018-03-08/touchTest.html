@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>touck</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+            .box{
+                width:200px;
+                height:200px;
+                background:cadetblue;
+                margin:0;
+                padding:0;
+                left: 0px;
+                top: 0px;
+                position:absolute;
+            }
+    </style>
+    <script>
+        window.onload = function (){
+            let box = document.getElementsByClassName('box')[0];
+
+            box.addEventListener('touchstart',function (ev){
+                let disX = ev.targetTouches[0].clientX - box.offsetLeft;
+                let disY = ev.targetTouches[0].clientY - box.offsetTop;
+
+                
+                function fnMove(ev) {
+                    
+                    box.style.left = ev.targetTouches[0].clientX - disX + 'px';
+                    box.style.top = ev.targetTouches[0].clientY - disY + 'px'; 
+                    console.log(box.style.left);
+                }
+                function fnend(ev) {
+                    box.removeEventListener('touchmove',fnMove,false);
+                    box.removeEventListener('touchend',fnend,false);
+                }
+                
+                box.addEventListener('touchmove',fnMove,false);
+                box.addEventListener('touchend',fnend,false);
+            },false);
+        }
+
+    </script>
+</head>
+    
+<body>
+    <div class="box"></div>
+</body>
+</html>

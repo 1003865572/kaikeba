@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style media="screen">
+      .box{
+        width: 120px;
+        height: 120px;
+        background: #ccc;
+        transform: translate(0);
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = () => {
+        let oBox = document.querySelector('.box');
+        let x=0, y=0;
+        oBox.addEventListener('touchstart', e => {
+          let direction = '';
+          const {clientX, clientY} = e.targetTouches[0];
+          let disX = clientX - x;
+          let disY = clientY - y;
+
+          let startX = clientX
+          let startY = clientY
+
+          const fnMove = (e) => {
+            const { clientX, clientY } = e.targetTouches[0];
+            if (direction === '') {
+              if (Math.abs(clientX - startX) > 5) {
+                direction = 'x'
+
+              } else if (Math.abs(clientY - startY) > 5) {
+                direction = 'y'
+              }
+            } else {
+              if (direction === 'x') {
+                x = clientX - disX;
+              } else if (direction === 'y') {
+                y = clientY - disY;
+              }
+              oBox.style.transform = `translate(${x}px, ${y}px)`;
+            }
+          }
+          const fnEnd = () => {
+            oBox.removeEventListener('touchmove', fnMove, false);
+            oBox.removeEventListener('touchend', fnEnd, false);
+          }
+
+          oBox.addEventListener('touchmove', fnMove, false);
+          oBox.addEventListener('touchend', fnEnd, false);
+
+        }, false)
+      }
+    </script>
+  </head>
+  <body>
+    <div class="box">
+
+    </div>
+  </body>
+</html>

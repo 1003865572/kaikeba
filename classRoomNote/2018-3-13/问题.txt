@@ -1,0 +1,45 @@
+老师，请问为什么我这边的browser-sync，用手机输入那个地址打不开呢，我把这个地址输入到草料里生成的二维码扫描之后也是打不开的，手机和电脑连的同一个WiFi，地址如：http://192.168.3.4:3004/gesture-rotate.html,电脑上是没有问题的。
+1.地址有问题
+2.防火墙
+
+ping 192.168.3.4
+
+--------------------------------------------------------------------------------
+
+问题：老师，我运行browser-sync工具，在自己电脑上只能通过localhost访问的到，为什么通过ip地址不能访问，通过IP访问就说 您被禁止访问互联网， 关了windows的防火墙也不行
+
+
+老师，禁止用户缩放的meta标签好像在UC浏览器和手机自带的浏览器上不好使呢，依然可以双指放大缩小，在微信的那个浏览器和谷歌浏览器正常
+
+--------------------------------------------------------------------------------
+
+淘宝首页是限制缩放的~~在ios10以上的safari也是限制了缩放的
+
+linux n
+
+npm i -g n
+n
+
+--------------------------------------------------------------------------------
+
+1.browser-sync
+  a.地址有问题
+  b.防火墙——主机、路由器
+2.库：
+  iscroll——滚动
+  hammer——手势
+
+--------------------------------------------------------------------------------
+
+iScroll
+
+--------------------------------------------------------------------------------
+
+module.js:557　 throw err;　 ^Error: Cannot find module 'D:\nodejs\node_modules\npm\bin\npm-cli.js'　 at Function.Module._resolveFilename (module.js:555:15)　 at Function.Module._load (module.js:482:25)　 at Function.Module.runMain (module.js:701:10)　 at startup (bootstrap_node.js:194:16)　 at bootstrap_node.js:618:3module.js:557　 throw err;　 ^Error: Cannot find module 'D:\nodejs\node_modules\npm\bin\npm-cli.js'　 at Function.Module._resolveFilename (module.js:555:15)　 at Function.Module._loa
+
+--------------------------------------------------------------------------------
+
+发送了post请求后为什么会先发送一个option请求，如何避免？
+普通post不会发option
+
+ajax、upload
