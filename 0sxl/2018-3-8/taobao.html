@@ -39,6 +39,7 @@
           const {clientX: startX, clientY: startY} = ev.targetTouches[0]
           let disX = startX - banner.offsetLeft - x;
           let disY = startY - banner.offsetTop;
+          banner.style.transition = 'none'
 
           let dix = ''
           const moveFn = (ev) => {
@@ -69,6 +70,11 @@
             y = 0;
             app.style.transform = `translateY(0)`;
             app.style.transition = 'all 1s'
+            if (x > 0) {
+              x = 0;
+              banner.style.transform = `translateX(0px)`;
+              banner.style.transition = 'all .2s'
+            }
           }
 
           banner.addEventListener('touchmove', moveFn, false);
