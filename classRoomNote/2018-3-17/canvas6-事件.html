@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    body {background:black; text-align: center;}
+    #c1 {background:#FFF}
+    </style>
+    <script>
+    window.onload=function (){
+      let oC=document.getElementById('c1');
+      let gd=oC.getContext('2d');
+
+      gd.strokeRect(100, 100, 200, 150);
+
+      //
+      oC.onmousemove=function (ev){
+        let l=100,t=100,r=l+200,b=t+150;
+        let x=ev.clientX-oC.offsetLeft,y=ev.clientY-oC.offsetTop;
+
+        gd.clearRect(0,0,oC.width,oC.height);
+
+        if(l<=x && x<=r && t<=y && y<=b){
+          gd.strokeStyle='red';
+        }else{
+          gd.strokeStyle='black';
+        }
+
+        gd.strokeRect(100, 100, 200, 150);
+      };
+    };
+    </script>
+  </head>
+  <body>
+    <canvas id="c1" width="800" height="600"></canvas>
+  </body>
+</html>

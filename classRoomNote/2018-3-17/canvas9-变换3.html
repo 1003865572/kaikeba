@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    body {background:black; text-align: center;}
+    #c1 {background:#FFF}
+    </style>
+    <script>
+    window.onload=function (){
+      let oC=document.getElementById('c1');
+      let gd=oC.getContext('2d');
+      let r=0;
+
+      requestAnimationFrame(next);
+
+      function next(){
+        gd.clearRect(0,0,oC.width,oC.height);
+
+        r++;        //?
+
+        gd.save();                      //保存：canvas的状态（图形并不保存）——颜色、translate、rotate
+        gd.translate(200, 175);
+        gd.rotate(r*Math.PI/180);
+
+        gd.strokeRect(-100, -75, 200, 150);
+        gd.restore();                   //恢复：恢复到上一次保存的状态
+
+        requestAnimationFrame(next);
+      }
+    };
+    </script>
+  </head>
+  <body>
+    <canvas id="c1" width="800" height="600"></canvas>
+  </body>
+</html>
