@@ -43,7 +43,7 @@ module.exports = {
     },
     "logLevel": "log",
     "logPrefix": "Browsersync",
-    "logConnections": false,
+    "logConnections": true,
     "logFileChanges": true,
     "logSnippet": true,
     "rewriteRules": [],

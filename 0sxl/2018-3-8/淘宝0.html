@@ -6,17 +6,26 @@
     <title>淘宝</title>
     <style media="screen">
       *{margin: 0; padding: 0;}
-      .app{}
-    </style>
-    <script type="text/javascript">
-      window.onload = () => {
+      html{font-size: 10px;}
+      .app{
+        width: 48rem;
+      }
+      header{
         
       }
+    </style>
+    <script type="text/javascript">
+      window.onresize = () => {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 48 + 'px';
+      }
+      window.onresize();
     </script>
   </head>
   <body>
     <div class="app">
-
+      <header>
+        <h1></h1>
+      </header>
     </div>
   </body>
 </html>

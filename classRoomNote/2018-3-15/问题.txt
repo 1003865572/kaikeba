@@ -1,0 +1,15 @@
+2. Hammer的滑动事件在上下滑动和左右滑动的处理不同
+Hammer的swipe事件只有swipeleft和swiperight有效，swipeup和swipedown无效
+Hammer的pan事件的panleft和panright会不停的触发，panup和pandown只触发一次
+
+pan   拖动-touch
+swipe 结果
+
+start、move、end
+
+--------------------------------------------------------------------------------
+
+swipe
+pan start move end
+
+--------------------------------------------------------------------------------

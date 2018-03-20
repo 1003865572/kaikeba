@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title></title>
+    <script src="jquery.js" charset="utf-8"></script>
+    <script src="hammer.js" charset="utf-8"></script>
+    <style media="screen">
+    * {margin:0; padding:0; list-style:none}
+
+    .page .nav {width:100%; overflow:hidden; padding: 6px 0; height:14px;}
+    .page .nav ul {position:relative; overflow:hidden;}
+    .page .nav ul li {float:left; width:80px; text-align:center; transition:0.6s all ease}
+    .page .nav ul li.active {color:#F00}
+    .page .nav ul .line {position:absolute; left:0; bottom:0; width:80px; height:1px; background:black; transition:0.6s all ease}
+
+    .page .wrap {width:100%; height:600px; overflow:hidden;}
+    .page .content {overflow:hidden; height:600px;}
+    .page .content-item {width:375px; height:600px; float:left; box-sizing:border-box; border: 1px solid black;}
+    </style>
+    <script src="hammer.js" charset="utf-8"></script>
+    <script>
+    window.onload=function (){
+      let oPage=document.querySelector('.page');
+      let oNav=document.querySelector('.page .nav');
+      let oNavUl=document.querySelector('.page .nav ul');
+      let aNavLi=oNavUl.getElementsByTagName('li');
+
+      let oContent=document.querySelector('.content');
+      let aContentItem=document.querySelectorAll('.content-item');
+
+      //
+      oNavUl.style.width=aNavLi[0].offsetWidth*aNavLi.length+'px';
+      oContent.style.width=aContentItem[0].offsetWidth*aContentItem.length+'px';
+
+
+      loadData(0);
+      function loadData(index){
+        $.ajax({
+          url: `./data/${index+1}.txt`,
+          success(txt){
+            aContentItem[index].innerHTML=txt;
+          },
+          error(){
+            alert('加载失败');
+          }
+        });
+      }
+
+      //导航可点击
+      Array.from(aNavLi).forEach((li,index)=>{
+        let hammer=new Hammer(li);
+        hammer.on('tap', function (){
+          goto(index);
+        });
+      });
+
+      function goto(n){
+        Array.from(aNavLi).forEach(li=>li.className='');
+        aNavLi[n].className='active';
+        document.querySelector('.line').style.left=aNavLi[n].offsetLeft+'px';
+
+        let left=aNavLi[n].offsetLeft-(document.documentElement.clientWidth-aNavLi[n].offsetWidth)/2;
+
+        if(left<0){
+          left=0;
+        }else if(left>oNavUl.offsetWidth-oNav.offsetWidth){
+          left=oNavUl.offsetWidth-oNav.offsetWidth;
+        }
+
+        oNavUl.style.transition='0.6s all ease';
+        oNavUl.style.transform=`translateX(${-left}px)`;
+
+        //content
+        oContent.style.transition='0.6s all ease';
+        oContent.style.transform=`translateX(${-aContentItem[0].offsetWidth*n}px)`;
+
+        function fnEnd(){
+          oNavUl.style.transition='none';
+          oContent.style.transition='none';
+          oNavUl.removeEventListener('transitionend', fnEnd, false);
+        }
+        oNavUl.addEventListener('transitionend', fnEnd, false);
+
+        loadData(n);
+      }
+
+      //
+      {
+        let hammer=new Hammer(oContent);
+
+        let start_x,start_y;
+        let translateX=0,old_translateX;
+
+        hammer.on('panstart', function (ev){
+          start_x=ev.center.x;
+          start_y=ev.center.y;
+
+          old_translateX=translateX;
+        });
+        hammer.on('panmove', function (ev){
+          //假设：就是横向拖
+          translateX=ev.center.x-start_x+old_translateX;
+
+          oContent.style.transform=`translateX(${translateX}px)`;
+
+          //
+          /*let w=aContentItem[0].offsetWidth;
+          let n=-Math.floor(translateX/w);
+
+          let scale=(translateX-(-n)*w)/w
+
+          if(n<1){
+            n=1;
+          }
+
+          aNavLi[n-1].style.color=`rgb(${Math.round(scale*0xFF)},0,0)`;
+          aNavLi[n].style.color=`rgb(${Math.round((1-scale)*0xFF)},0,0)`;*/
+
+        });
+        hammer.on('panend', function (){
+          if(translateX>0){
+            translateX=0;
+          }
+
+          let n=Math.round(-translateX/aContentItem[0].offsetWidth);
+
+          translateX=-n*aContentItem[0].offsetWidth;
+
+          goto(n);
+        });
+      }
+
+    };
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <div class="nav">
+        <ul>
+          <li class="active">趣图</li>
+          <li>推荐</li>
+          <li>两会</li>
+          <li>视频</li>
+          <li>段子</li>
+          <li>aaa</li>
+          <li>bbb</li>
+          <li>ccc</li>
+          <li>ddd</li>
+          <li>eee</li>
+          <div class="line"></div>
+        </ul>
+      </div>
+      <div class="wrap">
+        <div class="content">
+          <div class="content-item"></div>
+          <div class="content-item"></div>
+          <div class="content-item"></div>
+          <div class="content-item"></div>
+          <div class="content-item"></div>
+          <div class="content-item"></div>
+          <div class="content-item"></div>
+          <div class="content-item"></div>
+          <div class="content-item"></div>
+          <div class="content-item"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
