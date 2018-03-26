@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title></title>
+    <script src="./hammer.js"></script>
+    <style media="screen">
+      .box{
+        width: 300px; height: 300px; background: #ccc; margin: 100px auto 0;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = () => {
+        let oBox = document.querySelector('.box');
+        let hammer = new Hammer(oBox);
+
+        hammer.get('pinch').set({enable: true})
+
+        let scale=1,old_scale;
+        hammer.on('pinchstart', () => {
+          old_scale = scale
+          console.log(scale, old_scale)
+        })
+        hammer.on('pinchmove', ev => {
+          scale = old_scale * ev.scale
+          console.log(scale)
+          oBox.style.transform = `scale(${scale})`
+        })
+        // hammer.on('pinchend', () => {})
+
+      }
+    </script>
+  </head>
+  <body>
+    <div class="box">
+
+    </div>
+  </body>
+</html>
