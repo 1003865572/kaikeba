@@ -7,7 +7,7 @@
     <style media="screen">
       *{ margin: 0; padding: 0; list-style: none}
       #sms{}
-      #sms li{width: 100%; overflow: hidden; height: 30px; border-bottom: 1px solid #ccc; position: relative;}
+      #sms li{width: 100%; overflow: hidden; height: 30px; border-bottom: 1px solid #ccc; position: relative; transition: all 1s ease; }
       #sms li a.btn-del { position: absolute; right: 0; top: 0; line-height: 30px; background: red; color: #fff; display: inline-block; width: 0px; text-align: center; text-decoration: none; transition: .6s all ease; }
       #sms li a.btn-del span{ width: 80px; overflow: hidden; display: inline-block;}
     </style>
@@ -37,6 +37,18 @@
           hammer.on('swiperight',() => {
             btnDel.style.width = '0px'
           })
+
+          btnDel.onclick = function () {
+            btnDel.style.width = '0'
+            btnDel.addEventListener('transitionend', function(ev) {
+              oLi.style.height='0';
+              ev.cancelBubble=true;
+              oLi.addEventListener('transitionend', function() {
+                oUl.removeChild(oLi);
+              }, false)
+            }, false)
+          }
+
         })
 
       }
