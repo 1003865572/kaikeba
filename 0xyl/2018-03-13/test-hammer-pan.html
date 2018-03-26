@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>hammer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="hammer.js"></script>
+    <!-- <script src="http://wechatfe.github.io/vconsole/lib/vconsole.min.js?v=3.0.0.0" charset="utf-8"></script> -->
+
+       
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            margin: 150px auto 0;
+            background: cadetblue;
+        }  
+    </style>
+    <script>
+        window.onload = function (){
+            let box = document.getElementsByClassName('box')[0];
+
+            let hammer = new Hammer(box);
+            // window.vConsole = new window.VConsole();
+            hammer.on('tap',ev=>{
+                console.log(ev.center.x,ev.center.y);
+            });
+
+            hammer.on('panleft',ev=>{
+                console.log('pan left');
+            });
+            hammer.on('panright',ev=>{
+                console.log('pan right');
+            });
+            
+            hammer.on('panup',ev=>{
+                console.log('pan up');
+            });
+
+            hammer.on('pandrown',ev=>{
+                console.log('pan drown');
+            });
+
+            hammer.on('swipeleft',ev=>{
+                console.log('swipe left');
+            });
+
+            hammer.on('swiperight',ev=>{
+                console.log('swipe right');
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>
