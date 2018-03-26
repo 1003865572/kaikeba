@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>message</title>
+    <meta name="viewport" content="width=device-width">
+    <script src="hammer.js"></script>
+    <style>
+        * {margin: 0;padding: 0;list-style: none;}
+        
+        .oul {
+            width:100%;
+            
+        }
+        .oul li{
+            border: 1px solid black;
+            height:30px;
+            position: relative;
+            transition: 0.6s all ease;
+            overflow: hidden;
+        }
+        .text {
+            text-align: center;
+            line-height:30px;
+            position:absolute;
+            top: 0;
+            left: 0;
+        }
+        .del_btn {
+            width:0px;
+            background:red;
+            text-decoration:none;
+            position:absolute;
+            right: 0px;
+            height:100%;
+            line-height:30px;
+            text-align:center;
+            transition : 0.3s all ease;
+            overflow:hidden;
+        }
+        .oul li .del_btn span {
+            width: 80px;
+            display: block;
+        }
+    </style>
+</head>
+<script>
+    window.onload=function(){
+        const msg = [
+            "asdas使用123的供应fer商的",
+            "asdas使用23123的供应商的",
+            "asdas使用的供应商的",
+            "asdas使wed用123的供应商的",
+            "asdas使用er的供应商的",
+            "asdas使用的供应efref商的",
+        ];
+
+        let oul = document.getElementsByClassName('oul')[0];
+        let del_btn = document.getElementsByClassName('del_btn');
+
+        msg.forEach(text=>{
+            let li = document.createElement('li');
+            
+            li.innerHTML = `<span class="text">${text}</span><a href="javascript:;" class="del_btn"><span>删除</span></a>`;
+            oul.appendChild(li);
+
+
+            let hammer = new Hammer(li);
+            let li_a = li.getElementsByTagName('a')[0];
+            hammer.on('swipeleft',(ev)=>{
+                Array.from(del_btn).forEach(del=>{
+                    del.style.width = '0px';
+                });
+                li_a.style.width = '80px';
+            });
+            hammer.on('swiperight',(ev)=>{
+                li_a.style.width = '0px';
+            });
+            
+            li_a.onclick = function(){
+                li_a.style.width = '0px';
+                
+                li_a.addEventListener('transitionend',(ev)=>{
+                    let oli = li_a.parentElement;
+
+                    oli.style.height = '0px';
+                    oli.style.borderBottom = '0px solid #333';
+
+                    ev.cancelBubble = true;
+
+                    oli.addEventListener('transitionend',(ev)=>{
+                        oul.removeChild(oli);
+                    },false);
+
+                },false);
+            }
+
+            
+        });
+    };
+</script>
+<body>
+    <ul class="oul">
+        
+    </ul>
+</body>
+</html>
