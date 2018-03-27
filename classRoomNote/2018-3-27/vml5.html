@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    v\:* { behavior: url(#default#VML); position:absolute;}
+    </style>
+    <script>
+    window.onload=function (){
+      var oBtn=document.getElementById('btn1');
+
+      oBtn.onclick=function (){
+        var oShape=document.createElement('v:shape');
+
+        oShape.style.width='1000px';
+        oShape.style.height='1000px';
+
+        oShape.path='M 100 100 L 300 500 400 100 X';
+        oShape.strokecolor='red';
+
+        document.body.appendChild(oShape);
+      };
+    };
+    </script>
+  </head>
+  <body>
+    <input type="button" name="" value="创建" id="btn1">
+  </body>
+</html>
