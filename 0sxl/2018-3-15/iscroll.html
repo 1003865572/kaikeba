@@ -29,6 +29,10 @@
       .parent .dropup{
         bottom: 0;
       }
+      .gif {width: 56px; height: 100px; background: url(timg.jpg) 0 0 no-repeat;
+        position: absolute;
+        top: 0; left: 0; z-index: 999
+      }
     </style>
     <script type="text/javascript">
       window.onload = function () {
@@ -45,8 +49,15 @@
         let oDropUp = document.getElementsByClassName('dropup')[0];
         let oParent = document.getElementsByClassName('parent')[0];
         let oChild = oParent.getElementsByClassName('child')[0];
+        let gif = oParent.getElementsByClassName('gif')[0];
         console.log(iscroll)
         iscroll.on('scroll', function() {
+          console.log(iscroll.y)
+          let frame = Math.floor(iscroll.y / 30);
+          if (frame >= 8) {
+            frame = 8;
+          }
+          gif.style.backgroundPosition = `-${frame * 56}px 0`
           if (iscroll.y > 50) {
             oDropDown.innerHTML = '松开刷新'
           } else {
@@ -68,6 +79,7 @@
 
             setTimeout(() => {
               request(function(text) {
+                gif.style.backgroundPosition = `0 0`
                 iscroll.enable();
                 iscroll.scrollTo(0, 0);
                 oChild.innerHTML = `${Date.now()}: ${text}`;
@@ -89,6 +101,7 @@
             console.log(-(oChild.offsetHeight - oParent.offsetHeight))
             setTimeout(() => {
               request(text => {
+                gif.style.backgroundPosition = `0 0`
                 oChild.innerHTML = `${text}: ${Date.now()}`;
                 iscroll.refresh();
                 iscroll.enable();
@@ -141,6 +154,7 @@
 
         <p>山东省检察院公诉二处的两名检察官程才和汤宁就是在此时接手此案。虽然相较其他恶性案件，本案的案情并不复杂，但青春少年，本该是人生最得意的阶段，2名20岁出头的小伙子却落得如此结果，给家人留下了无法承受的伤痛，实在让人深感痛心和惋惜。</p>
       </div>
+      <div class="gif"></div>
       <div class="dropDown">
         下拉加载更多
       </div>
