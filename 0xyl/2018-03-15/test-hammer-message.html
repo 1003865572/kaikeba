@@ -8,14 +8,19 @@
     <script src="hammer.js"></script>
     <style>
         * {margin: 0;padding: 0;list-style: none;}
-        
         .oul {
             width:100%;
-            
+        }
+        html ,body {
+            height:100%;
         }
         .sms {
             height: 100%;
             overflow: hidden;
+        }
+        .oul {
+            width: 100%;
+            transform: translateY(0px);
         }
         .oul li{
             border: 1px solid black;
@@ -110,16 +115,62 @@
 
             let hammer = new Hammer(li);
             let li_a = li.getElementsByTagName('a')[0];
-            hammer.on('swipeleft',(ev)=>{
-                Array.from(del_btn).forEach(del=>{
-                    del.style.width = '0px';
-                });
-                li_a.style.width = '80px';
-            });
-            hammer.on('swiperight',(ev)=>{
-                li_a.style.width = '0px';
+            
+            let start_x,start_y;
+            let start_delw,delw = 0;
+            let dir = '';
+            
+            hammer.on('panstart',ev=>{
+                start_y = ev.center.y;
+                start_x = ev.center.x;
+
+                dir = "";
+                start_delw = delw;
             });
             
+            hammer.on('panmove',ev=>{
+                if(dir == ''){
+                    if(Math.abs(ev.center.x - start_x) >= 5){
+                        dir= 'x';
+                    }else if((Math.abs(ev.center.y - start_y) >= 5)){
+                        dir= 'y';
+                    }
+                }else{
+                    
+                    if(dir == 'x'){
+                        let w = start_delw + start_x - ev.center.x;
+                        
+                        if(w < 80){
+                            li_a.style.width = w + 'px';
+                        }else{
+                            // console.log(dir,w);
+                            li_a.style.width=80+(w-80)/6+'px';
+                        }
+                        delw = w;
+                    }else{
+                        //滚动
+                    }
+                }
+            });
+
+            hammer.on('panend',ev=>{
+                // console.log('panend');
+                li_a.style.transition = '0.3s all ease';
+
+                if(delw > 80){
+                    delw = 80;
+                    li_a.style.width = delw+ 'px';
+                }else{
+                    delw = 0;
+                    li_a.style.width = 0 + 'px';
+                }
+                function fun_end(){
+                    li_a.style.transition="none";
+                    li_a.removeEventListener('transitionend', fun_end ,false);
+                }
+                li_a.addEventListener("transitionend",fun_end,false);
+            });
+
             li_a.onclick = function(){
                 li_a.style.width = '0px';
                 
@@ -127,7 +178,7 @@
                     let oli = li_a.parentElement;
 
                     oli.style.height = '0px';
-                    oli.style.borderBottom = '0px solid #333';
+                    oli.style.border = '0px solid #333';
 
                     ev.cancelBubble = true;
 
@@ -137,7 +188,6 @@
 
                 },false);
             }
-
         });
     };
 </script>
