@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title></title>
+    <style media="screen">
+      *{ margin: 0; padding: 0; list-style: none;}
+      .child{
+        width: 100%;
+      }
+      .child li{ border-bottom: 1px solid #ccc; position: relative; height: 32px; line-height: 32px; background: #fff;
+        transition: all .6s ease;
+      }
+      .child li a.btn-del { width: 0px; background: red; color: #fff;
+        position: absolute; top: 0; right: 0; text-align: center; text-decoration:none;
+        transition: all .6s ease; overflow: hidden;
+      }
+      .child li a.btn-del span{ display: block; width: 80px; }
+    </style>
+    <script src="hammer.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      window.onload = function () {
+        var oUl = document.getElementsByClassName('child')[0];
+        var sms = [ '111','222','333','444','555','666' ];
+        var aBtnDel = document.getElementsByClassName('btn-del');
+        sms.forEach(text => {
+          var oLi = document.createElement('li');
+          oLi.innerHTML = '<span>'+text+'</span><a class="btn-del" href="javascript:;"><span>删除</span></a>';
+          let btnDel =  oLi.getElementsByTagName('a')[0];
+          var hammer = new Hammer(oLi);
+
+          hammer.on('swipeleft', function() {
+            Array.from(aBtnDel).forEach(btn => {
+              btn.style.width = 0
+            })
+            btnDel.style.width = '80px';
+          })
+          hammer.on('swiperight', function() {
+            btnDel.style.width = '0px';
+          })
+          oUl.appendChild(oLi);
+          btnDel.onclick = function() {
+            btnDel.style.width = '0';
+            btnDel.addEventListener('transitionend', function(ev) {
+              oLi.style.height = 0;
+              oLi.style.borderBottom = '0px solid #ccc';
+
+              ev.cancelBubble = true
+
+              oLi.addEventListener('transitionend', function() {
+                oUl.removeChild(oLi);
+              }, false)
+            }, false)
+          }
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <ul class="child"></ul>
+  </body>
+</html>
