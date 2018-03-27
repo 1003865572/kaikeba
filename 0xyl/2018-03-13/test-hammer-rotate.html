@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>hammer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="hammer.js"></script>
+    <!-- <script src="http://wechatfe.github.io/vconsole/lib/vconsole.min.js?v=3.0.0.0" charset="utf-8"></script> -->
+
+       
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            margin: 150px auto 0;
+            background: cadetblue;
+        }  
+    </style>
+    <script>
+        window.onload = function (){
+            let box = document.getElementsByClassName('box')[0];
+            let deg = 0;old_deg;
+
+            let hammer = new Hammer(box);
+
+            hammer.get('rotate').set({enable:true});
+            hammer.on('rotatestart',ev=>{
+                console.log(' start');
+                old_deg = deg;
+            });
+            hammer.on('rotatemove',ev=>{
+                console.log(`move`);
+                deg=old_deg+ev.rotation;
+                oBox.style.transfrom=`rotate(${deg}deg)`;
+            });
+            hammer.on(`rotateend`,ev=>{
+                console.log(`end`);
+            });
+            
+            
+            
+        }
+    </script>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>

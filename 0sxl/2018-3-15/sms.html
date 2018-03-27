@@ -6,7 +6,9 @@
     <title>删除短信</title>
     <style media="screen">
       *{ margin: 0; padding: 0; list-style: none}
-      #sms{}
+      html,body{height: 100%;}
+      .parent{ height: 100%; width: 100%; overflow: hidden;}
+      .parent #sms{ transform: translateY(-100px) }
       #sms li{width: 100%; overflow: hidden; height: 30px; border-bottom: 1px solid #ccc; position: relative; transition: all 1s ease; }
       #sms li a.btn-del { position: absolute; right: 0; top: 0; line-height: 30px; background: red; color: #fff; display: inline-block; width: 0px; text-align: center; text-decoration: none; transition: .6s all ease; }
       #sms li a.btn-del span{ width: 80px; overflow: hidden; display: inline-block;}
@@ -14,13 +16,7 @@
     <script src="hammer.js" charset="utf-8"></script>
     <script type="text/javascript">
       window.onload = function () {
-        let sms = [
-          '111',
-          '222',
-          '333',
-          '44544',
-          '5555',
-        ]
+        let sms = ['111','222','333','44544','5555','222','333','44544','5555','222','333','44544','5555','222','333','44544','5555','222','333','44544','5555','222','333','44544','5555','222','333','44544','5555',]
         var oUl = document.getElementById('sms');
         console.log(oUl)
         sms.forEach(text => {
@@ -31,11 +27,30 @@
           let btnDel = oLi.getElementsByTagName('a')[0];
           let hammer = new Hammer(oLi);
 
-          hammer.on('swipeleft',() => {
-            btnDel.style.width = '80px'
+          let start_x,start_y;
+          let dis = '';
+          hammer.on('panstart', function(ev) {
+            const {x, y} = ev.center;
+            start_x = x;
+            start_y = y;
+            dis = '';
           })
-          hammer.on('swiperight',() => {
-            btnDel.style.width = '0px'
+          hammer.on('panmove', function(ev) {
+            const {x, y} = ev.center;
+            if (dis === '') {
+              if (Math.abs(start_x - x) > 5) {
+                dis = 'x';
+              } else if (Math.abs(start_y - y) > 5) {
+                dis = 'y'
+              }
+            }
+            console.log(
+              dis
+            )
+          })
+          hammer.on('panend', function(ev) {
+            console.clear()
+            console.log('end')
           })
 
           btnDel.onclick = function () {
@@ -55,6 +70,8 @@
     </script>
   </head>
   <body>
-    <ul id="sms"></ul>
+    <div class="parent">
+      <ul id="sms"></ul>
+    </div>
   </body>
 </html>
