@@ -8,9 +8,10 @@
     <script src="iscroll-probe.js" charset="utf-8"></script>
     <style media="screen">
         .parent {width:300px; height:400px; border:1px solid black; margin:50px auto 0; overflow:hidden; position:relative;}
-        .parent .child {width:300px; background:#FFF; position:relative; z-index: 999; overflow:hidden;}
+        /* .parent .child {width:300px; background:#FFF; position:relative; z-index: 999; overflow:hidden;}
         .parent .dropdown {position:absolute; left: 0; top: 0; width:100%; text-align:center; line-height: 40px;}
-        .parent .loadmore {position:absolute; left: 0; bottom: 0; width:100%; text-align:center; line-height: 40px;}
+        .parent .loadmore {position:absolute; left: 0; bottom: 0; width:100%; text-align:center; line-height: 40px;} */
+        .img {width: 114px;height: 127px;background: url(timg.jpg) no-repeat ; background-position: 0 0 ; position: absolute; left: 0; top: 0;}
     </style>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="  crossorigin="anonymous"></script>
 </head>
@@ -25,60 +26,16 @@
             probeType : 3
         });
 
-        let dropdown = document.getElementsByClassName('dropdown')[0];
-        let loadmore = document.getElementsByClassName('loadmore')[0];
-        let parent = document.getElementsByClassName('parent')[0];
-        let child = document.getElementsByClassName('child')[0];
+        let img_ = document.getElementsByClassName('img')[0];
 
         scroll.on('scroll',ev=>{
-            if(scroll.y > 50){
-                dropdown.innerHTML = '松手刷新';
-            }else{
-                dropdown.innerHTML = '下拉刷新';
+            let num = Math.floor(scroll.y / 10);
+
+            if(num >= 8 ){
+                num = 8;
             }
-            
-            if(-scroll.y-(child.offsetHeight-parent.offsetHeight)>=50){
-                loadmore.innerHTML = '松手加载';
-            }else{
-                loadmore.innerHTML = '加载更多';
-            }
-        });
+            img_.style.backgroundPosition = `-${num*114}px`;
 
-        parent.addEventListener('touchend',function(){
-            if(scroll.y >= 50){
-                scroll.disable();
-                
-                child.style.transition = '0.6s all ease';
-                child.style.transform = `translateY(${dropdown.offsetHeight}px)`;
-
-                dropdown.innerHTML = '<img height="20" src="loading.gif"/>';
-
-                // setTimeout(() => {
-                    $.ajax({
-                        url :'1.txt',
-                        success (data){
-                            child.innerHTML = data;
-                            child.style.transition = 'translateY(0px)';
-                            dropdown.innerHTML = '下拉刷新';
-                            function transEnd(){
-                                console.log(111111111111111);
-
-                                child.style.transition = 'none';
-                                scroll.y = 0;
-                                scroll.enable();
-                                scroll.scrollTo(0,0);
-
-                                child.removeEventListener('transitionend',transEnd,false);
-                            }
-                            child.addEventListener('transitionend',transEnd,false);
-
-                        },error (data){
-                            alert('加载失败');
-                        }
-                    });
-                // }, 2000);
-                
-            }
         });
 
     }
@@ -99,6 +56,7 @@
   
           <p>山东省检察院公诉二处的两名检察官程才和汤宁就是在此时接手此案。虽然相较其他恶性案件，本案的案情并不复杂，但青春少年，本该是人生最得意的阶段，2名20岁出头的小伙子却落得如此结果，给家人留下了无法承受的伤痛，实在让人深感痛心和惋惜。</p>
         </div>
+        <div class="img"></div>
         <div class="dropdown">下拉刷新</div>
         <div class="loadmore">加载更多</div>
       </div>
