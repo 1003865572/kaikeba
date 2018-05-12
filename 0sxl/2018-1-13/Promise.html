@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="jquery.js" type="text/javascript" ></script>
+    <script>
+      window.onload = () => {
+        let p = new Promise((resolve, reject) => {
+          $.ajax({
+            url: 'test.json',
+            dataType: 'json',
+            success: res => {
+              console.log(res);
+              resolve(res);
+            },
+          })
+        })
+
+        let p1 = new Promise((resolve, reject) => {
+          $.ajax({
+            url: 'test1.json',
+            dataType: 'json',
+            success: res => {
+              console.log(res);
+              resolve(res);
+            },
+          })
+        })
+
+        Promise.all([
+          p,p1
+        ])
+
+      }
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

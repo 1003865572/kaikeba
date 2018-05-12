@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    .box {width:400px; height:400px; background:#CCC; margin:100px auto 0;}
+    </style>
+    <script src="hammer.js" charset="utf-8"></script>
+    <script>
+    window.onload=function (){
+      let oBox=document.querySelector('.box');
+
+      let hammer=new Hammer(oBox);
+
+      /*
+      let config=hammer.get('rotate');
+      config.set({enable: true});
+      */
+
+      hammer.get('rotate').set({enable: true});
+      hammer.on('rotatestart', ev=>{});
+      hammer.on('rotatemove', ev=>{
+        //console.log(ev.rotation);       //角度
+        oBox.style.transfrom=`rotate(${ev.rotation}deg)`;
+      });
+      hammer.on('rotateend', ev=>{});
+    };
+    </script>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

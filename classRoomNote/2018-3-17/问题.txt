@@ -1,0 +1,38 @@
+Hammer是不是不适合处理上下滑动啊，那个panstart事件，只要是上下滑动的，打印的ev.center.x和ev.center.y都是0，左右滑动的没问题；而且上下滑动时，第一次点击滑动的时候panmove是不会触发的，必须要松手后第二次点击才会触发
+
+
+3月10号 ，gesture-resize.html , 用到了 oBox.style.transform=`scale(${scale})`; 控制缩放。 但是， 我如果把JS 全部移除后，只留div和css，然后， 手机端再访问html， 照样可以缩放啊。 那么为什么 还要写js 控制缩放
+
+--------------------------------------------------------------------------------
+
+上节课文字颜色渐变let scale=(translateX-Math.floor(translateX/w)*w)/w; 咋想都没想通呢，老师再解释下呢
+
+
+hammer，默认情况下，纵向移动是禁用的，可通过如何代码（DIRECTION_VERTICAL 或 DIRECTION_ALL）开启
+
+
+hammer.get("pan").set({　 // direction: Hammer.DIRECTION_VERTICAL　 direction: Hammer.DIRECTION_ALL});
+
+
+老师请问这个网站是怎么通过鼠标（移动端陀螺仪）来控制DIV旋转的角度的？http://www.jp.playstation.com/scej/title/gravitydaze/2/
+
+
+
+// hammer.add(new Hammer.Swipe());／／奇葩，用了这个swipeup能行，swipeleft就不行了。反之。找到了解决办法。hammer的rotate不起作用，老师的代码也不起作用。pinch是可以的。短信列表.html:62 Uncaught DOMException: Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.　　 在点击了删除之后。
+
+--------------------------------------------------------------------------------
+
+越近的——层级越高 走的越多
+越远——走的越少
+
+--------------------------------------------------------------------------------
+
+canvas 怎么做自适应呢 老师
+window.onresize
+
+http://www.xuanfengge.com/
+http://www.17sucai.com/pins/demo-show?id=27738
+
+--------------------------------------------------------------------------------
+
+https://codepen.io/VincentGarreau/full/pnlso/

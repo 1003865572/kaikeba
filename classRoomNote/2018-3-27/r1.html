@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="raphael.js" charset="utf-8"></script>
+    <script>
+    window.onload=function (){
+      var page=Raphael(0,0,800,600);
+
+      page.rect(100,100,400,300).attr('fill', 'yellow').attr('stroke', 'red').click(function (){
+        //this.attr('fill', 'green');
+        this.animate({width: 200, fill: 'green', strokewidth: 20}, 2000, 'elastic');
+      });
+
+    };
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

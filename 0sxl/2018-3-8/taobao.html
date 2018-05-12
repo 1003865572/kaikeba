@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=0,maximum-scale=0,user-scalable=no">
+    <title>taobao</title>
+    <style media="screen">
+      *{margin: 0; padding: 0;}
+      .app{
+        width: 48rem;
+      }
+      header{
+        width: 48rem; height: 6rem; background: #ccc; overflow: hidden; position: relative; z-index: 2
+      }
+      header h1{
+        text-indent: -999rem; background: #eee; width: 5rem; height: 5rem; margin-top: .5rem; margin-left: .5rem;
+      }
+      .banner{ width: 48rem; height: 16rem; background: #eee; position: relative; overflow: hidden; }
+      .banner ol { position: absolute; right: 1rem; bottom: 1rem; z-index: 2;  }
+      .banner ol li { display: inline-block; width: .8rem; height: .8rem; background: #eee; border-radius: 50%; border: 1px solid #000; margin: 0 .2rem; }
+      .banner ol li.active{ background: red; }
+      .banner ul { width: 9999rem; height: 16rem; }
+      .banner ul li { display: inline-block; width: 48rem; height: 16rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; box-sizing: border-box; border: 10px solid red; float: left; }
+
+    </style>
+    <script type="text/javascript">
+      window.onresize = function () {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 48 + 'px';
+      }
+      window.onresize();
+
+      window.onload = function () {
+        let banner = document.querySelector('.banner ul');
+        let bannerIndex = document.querySelector('.banner ol');
+        let app = document.querySelector('.app');
+        let x=0,y=0;
+
+        banner.addEventListener('touchstart', ev => {
+          const {clientX: startX, clientY: startY} = ev.targetTouches[0]
+          let disX = startX - banner.offsetLeft - x;
+          let disY = startY - banner.offsetTop;
+          banner.style.transition = 'none'
+
+          let dix = ''
+          const moveFn = (ev) => {
+            const { clientY, clientX } = ev.targetTouches[0];
+            if (dix === '') {
+              if (Math.abs(clientX - startX) > 50) {
+                dix = 'x';
+              } else if (Math.abs(clientY - startY) > 50) {
+                dix = 'y';
+              }
+            } else {
+              if (dix === 'x') {
+                x = clientX - disX;
+              } else if (dix === 'y') {
+                app.style.transition = 'none'
+                y = clientY - disY;
+              }
+              banner.style.transform = `translateX(${x}px)`;
+              if (y > 0) {
+                app.style.transform = `translateY(${y/3}px)`;
+              } else {
+                app.style.transform = `translateY(${y}px)`;
+              }
+            }
+          }
+
+          const endFn = () => {
+            banner.removeEventListener('touchmove', moveFn, false);
+            banner.removeEventListener('touchend', endFn, false);
+            y = 0;
+            app.style.transform = `translateY(0)`;
+            app.style.transition = 'all 1s'
+            if (x > 0) {
+              x = 0;
+              banner.style.transform = `translateX(0px)`;
+              banner.style.transition = 'all .2s'
+            }
+          }
+
+          banner.addEventListener('touchmove', moveFn, false);
+          banner.addEventListener('touchend', endFn, false)
+        }, false)
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>淘</h1>
+    </header>
+    <div class="app">
+      <div class="banner">
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+        </ul>
+        <ol>
+          <li class="active"></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </div>
+
+  </body>
+</html>

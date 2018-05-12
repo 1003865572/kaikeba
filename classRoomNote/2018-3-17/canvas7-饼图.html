@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    body {background:black; text-align: center;}
+    #c1 {background:#FFF}
+    </style>
+    <script>
+    function d2a(n){
+      return n*Math.PI/180;
+    }
+    function a2d(){
+      return n*180/Math.PI;
+    }
+    window.onload=function (){
+      let oC=document.getElementById('c1');
+      let gd=oC.getContext('2d');
+
+      let cx=400,cy=300,r=200;
+      let datas=[
+        {data: 300, color: '#FC0'},
+        {data: 200, color: '#CF0'},
+        {data: 20, color: '#0FC'},
+      ];
+
+      //
+      function pie(startAng, endAng, color){
+        let x=cx+Math.cos(d2a(startAng))*r;
+        let y=cy+Math.sin(d2a(startAng))*r;
+
+        gd.beginPath();
+
+        //#1
+        gd.moveTo(cx, cy);
+        gd.lineTo(x, y);
+
+        //#2
+        gd.arc(cx, cy, r, d2a(startAng), d2a(endAng), false);
+
+        //#3
+        gd.closePath();
+
+        gd.fillStyle=color;
+        gd.fill();
+      }
+
+      //
+      let sum=0;
+      datas.forEach(data=>{
+        sum+=data.data;
+      });
+
+      let now=0;
+      datas.forEach(data=>{
+        let ang=360*data.data/sum;
+
+        pie(now, now+ang, data.color);
+
+        now+=ang;
+      });
+    };
+    </script>
+  </head>
+  <body>
+    <canvas id="c1" width="800" height="600"></canvas>
+  </body>
+</html>

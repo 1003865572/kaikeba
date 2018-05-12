@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title></title>
+    <style media="screen">
+      .box{width: 150px; height: 150px; border: 1px solid red; background: #ccc; margin: 0 auto; margin-top: 100px;}
+
+    </style>
+    <script>
+    function calcAng(touch1, touch2){
+
+      let x=touch1.clientX-touch2.clientX;
+      let y=touch1.clientY-touch2.clientY;
+
+      return Math.atan2(y, x)*180/Math.PI;
+    }
+
+    window.onload = () => {
+      let oBox = document.getElementsByClassName('box')[0];
+
+      let ang1, ang2;
+      let ang=0,old_ang;
+
+      document.addEventListener('touchstart', ev => {
+        if (ev.targetTouches.length >= 2) {
+          let [touch1, touch2] = ev.targetTouches;
+          ang1 = calcAng(touch1, touch2);
+          old_ang = ang;
+        }
+      }, false);
+
+      document.addEventListener('touchmove', ev => {
+        if (ev.targetTouches.length >= 2) {
+          let [touch1, touch2] = ev.targetTouches;
+          ang2 = calcAng(touch1, touch2);
+          ang=old_ang+ang2-ang1;
+          oBox.style.transform = `rotate(${ang}deg)`
+        }
+      }, false)
+
+    }
+
+    </script>
+  </head>
+  <body>
+    <div class="box">
+      abc123
+    </div>
+  </body>
+</html>

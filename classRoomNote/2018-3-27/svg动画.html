@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+    window.onload=function (){
+      let oL1=document.getElementById('l1');
+
+      oL1.onmouseover=function (){
+        let start=parseInt(oL1.getAttribute('x1'));
+        let end=400;
+        let dis=400-start;
+        let size=40;
+
+        let count=0;
+
+        next();
+        function next(){
+          count++;
+
+          let a=count/size;
+
+          let cur=start+dis*a*a*a;
+
+
+          oL1.setAttribute('x1', cur);
+
+          if(count<size){
+            requestAnimationFrame(next);
+          }
+        }
+      };
+    };
+    </script>
+  </head>
+  <body>
+    <svg id="svg1" width="800" height="600">
+      <line id="l1" x1="100" y1="100" x2="400" y2="300" style="stroke:red;stroke-width:20"></line>
+    </svg>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title></title>
+    <script type="text/javascript" src="./iscroll-probe.js"></script>
+    <style media="screen">
+      .parent{
+        width: 300px; height: 400px; margin: 50px auto 0; border: 1px solid #000;
+        overflow: hidden; position: relative;
+      }
+      .parent .child{
+        width: 600px; background: #fff; position: relative; z-index: 2; overflow: hidden;
+      }
+      .parent .dropdown, .parent .dropup{
+        width: 100%;
+        line-height: 40px;
+        text-align: center;
+        position: absolute;
+        left: 0;
+      }
+      .dropdown{
+        top: 0;
+      }
+      .dropup{
+        bottom: 0;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function () {
+        let oParent = document.getElementsByClassName('parent')[0]
+        let oChild = document.getElementsByClassName('child')[0]
+        let oDropDown = document.getElementsByClassName('dropdown')[0]
+        let oDropup = document.getElementsByClassName('dropup')[0];
+        let scroll = new IScroll('.parent', {
+          scrollY: true,
+          probeType: 3
+        })
+        scroll.on('scroll', function() {
+          if (scroll.y > 50) {
+            oDropDown.innerHTML = '松开加载'
+          } else {
+            oDropDown.innerHTML = '加载更多'
+          }
+          if (-scroll.y - (oChild.offsetHeight - oParent.offsetHeight) > 50) {
+            oDropup.innerHTML = '加载更多'
+          } else {
+            oDropup.innerHTML = '上拉刷新'
+          }
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="child">
+        <p>www.163.com/  - 百度快照 - 1029条评价
+        网易免费邮箱 - 中国第一大电子邮件服务商
+
+        <p>网易免费邮箱--中国第一大电子邮件服务商,提供以@163.com、@126.com和@yeah.net为后缀的免费邮箱。16年邮箱运营经验,系统快速稳定,垃圾邮件拦截率超过98%,邮箱...
+        email2.163.com/  - 百度快照 - 1029条评价
+        网易新闻
+        <p>新闻,新闻中心,包含有时政新闻,国内新闻,国际新闻,社会新闻,时事评论,新闻图片,新闻专题,新闻论坛,军事,历史,的专业时事报道门户网站
+        news.163.com/  - 百度快照 - 1086条评价
+        贵州163网-163贵州人事考试信息网
+
+        <p>贵州163网专为广大考生快速准确的提供贵州全省公务员、选调生、政法干警、事业单位、银行、医院、学校等人事考试动态信息和贵州本地企业招聘等本省资讯。
+        www.gzdysx.com/  - 百度快照 - 84%好评
+        163贵州人事考试信息网 贵州163
+        <p>163贵州人事考试信息网发布最新最全最好的贵州人事考试信息 公务员 事业单位 人才招聘等.163贵州网招聘吧旗下人事招考栏目
+        www.163gz.com/gzzp8/zk...  - 百度快照
+        163贵州人事考试信息网 163贵州网 贵州163 贵州招聘吧
+
+        <p>贵州163网专为广大考生快速准确的提供贵州全省公务员、选调生、政法干警、事业单位、银行、医院、学校等人事考试动态信息和贵州本地企业招聘等本省资讯。
+        www.gzdysx.com/  - 百度快照 - 84%好评
+        163贵州人事考试信息网 贵州163
+        <p>163贵州人事考试信息网发布最新最全最好的贵州人事考试信息 公务员 事业单位 人才招聘等.163贵州网招聘吧旗下人事招考栏目
+        www.163gz.com/gzzp8/zk...  - 百度快照
+        163贵州人事考试信息网 163贵州网 贵州163 贵州招聘吧
+
+        <p>贵州163网专为广大考生快速准确的提供贵州全省公务员、选调生、政法干警、事业单位、银行、医院、学校等人事考试动态信息和贵州本地企业招聘等本省资讯。
+        www.gzdysx.com/  - 百度快照 - 84%好评
+        163贵州人事考试信息网 贵州163
+        <p>163贵州人事考试信息网发布最新最全最好的贵州人事考试信息 公务员 事业单位 人才招聘等.163贵州网招聘吧旗下人事招考栏目
+        www.163gz.com/gzzp8/zk...  - 百度快照
+        163贵州人事考试信息网 163贵州网 贵州163 贵州招聘吧
+
+        <p>163贵州人事考试信息网,贵州163网,新99贵州网,最新贵州163贵阳人才招聘招考,公务员事业单位招考信息,永久免费发布贵州招聘等各类信息,全国链接出售网
+        www.163gz.com/  - 百度快照
+        《梦幻西游》手游官网-人人都玩 不玩才怪
+
+        <p>人人都玩,无处不在!《梦幻西游》手游作为国民级回合制手游,凭借清新亮丽的画面,原汁原味的剧情体验,以及全新主角漠少君、全新门派月宫等原创内容的融入,呈现出一个...
+      </div>
+      <div class="dropdown">下拉刷新</div>
+      <div class="dropup">上拉刷新</div>
+    </div>
+  </body>
+</html>

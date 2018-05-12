@@ -1,0 +1,81 @@
+常用：
+bounce          是否允许拖过了
+  bounceTime      回正时间
+  bounceEasing
+scrollX         bool
+scrollY         bool
+freeScroll
+  directionLockThreshold      方向锁定阈值：5
+startX
+startY
+disableMouse
+disablePointer
+disableTouch
+  mouseWheelSpeed
+  invertWheelDirection
+momentum        物理引擎
+                true——开启物理引擎，提高效果、性能降低
+                false——极大提升性能，效果我觉得差不多
+
+并没有什么鸟用：
+useTransform
+useTransition
+preventDefault
+preventDefaultException
+bindToWrapper     false
+eventPassthrough
+
+HWCompositing
+resizePolling
+resizeScrollbars
+snapThreshold
+
+
+
+
+
+
+Pointer = Mouse + Touch
+
+--------------------------------------------------------------------------------
+
+probeType——探测优先级
+1       低     定时探测
+2       中     实时检测用户拖拽
+3       高     实时检测用户拖拽+实时检测运动本身       自动禁用transition
+
+--------------------------------------------------------------------------------
+
+iscroll事件：
+scroll
+
+beforeScrollStart         手指按下去
+scrollStart               第一次移动
+scroll                    滚动中
+scrollEnd                 手指抬起来
+scrollCancel              手指按下没动，就抬起来了
+*zoomStart
+*zoomEnd
+
+--------------------------------------------------------------------------------
+
+iScroll   滚动
+hammer    手势
+
+--------------------------------------------------------------------------------
+
+事件：
+tap         点击，轻点——快250ms内，按下+抬起            click有延迟(250ms)
+press       点击，长点——超过250ms
+
+swipe       快速-滑动——速度超过300px/s
+pan         滑动
+
+--------------------------------------------------------------------------------
+
+start/move/end/cancel
+
+--------------------------------------------------------------------------------
+
+iscroll、hammer应用
+iscroll、hammer原理

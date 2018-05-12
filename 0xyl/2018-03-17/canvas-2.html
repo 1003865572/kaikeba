@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body{
+            background: black;text-align: center;
+        }
+        #ca1 {
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+    <canvas id="ca1" width="900" height="800"></canvas>
+    <script>
+        window.onload = function (){
+            let ca = document.getElementById('ca1');
+            let gd = ca.getContext('2d');
+            
+            gd.rect(200,200,400,300);
+            gd.fill();
+
+        }
+    </script>
+</html>

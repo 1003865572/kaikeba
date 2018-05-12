@@ -1,0 +1,31 @@
+#sms_list li a.btn-del {
+  /*transition:0.3s all ease;这里不定义，而在下面动态定义，是因为老师演示的时候说因为这个导致删除按钮出来的时候很卡*/
+  position:absolute; right:0; top:0; height:100%; width:0px; text-align:center;
+  line-height:30px; background:#F00; color:white; text-decoration:none;overflow:hidden;
+}
+老师讲不讲PWA的项目，能不能后面讲一下小程序和公众号开发。
+
+
+就是用vue起一个项目，然后本地有一个音乐，将这个音乐添加到页面里，哪里都可以，只要能播放和暂停，网上搜了一大堆，都没有实现，老师能说一下嘛
+audio+flash播放器
+
+requestAnimationFrame() 如何停止呢
+
+let stop=false;
+
+requestAnimationFrame(next);
+function next(){
+  xxxx
+
+  if(stop==false){
+    requestAnimationFrame(next);
+  }
+}
+
+'#'+(Math.random()*0x1000000<<0).toString(16);　 看不懂，老师能剖析一下吗
+#F304
+
+
+老师我写vue 不借助webpack 直接在html里面写vue 是不是很土
+
+--------------------------------------------------------------------------------

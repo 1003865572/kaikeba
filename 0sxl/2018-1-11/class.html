@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+      class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        showName : () => {
+          alert(this.name)
+        }
+        showAge : () => {
+          alert(this.age)
+        }
+      }
+      // let p = new Person('blue', 18)
+      // p.showName();
+      // p.showAge();
+
+      class Student extends Person {
+        constructor(name, age, num) {
+          super(name, age);
+          this.num = num;
+        }
+        showAll() {
+          console.log(this.name, this.age, this.num)
+        }
+      }
+      let s = new Student('aa', 18, 2)
+      s.showAll()
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

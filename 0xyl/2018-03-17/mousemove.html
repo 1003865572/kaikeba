@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>mousemove</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+    div {width: 200px;height: 200px ;position: absolute}
+</style>
+<body>
+    <div style="left:30px;top : 50px;background:green;z-Index:1"></div>
+    <div style="left:120px;top:280px;background:red;z-Index:2"></div>
+    <div style="left:380px;top:260px;background:blue;z-Index:3"></div>
+    <div style="left:600px;top:20px;background:black;z-Index:4"></div>
+</body>
+<script>
+    window.onload = function (){
+        let divs = document.getElementsByTagName('div');
+        let old_pos = Array.from(divs).map(div=>{
+            return {
+                left : div.offsetLeft,
+                top : div.offsetTop
+            }
+        });
+        document.onmousemove = function (ev){
+            Array.from(divs).forEach((div,index)=>{
+                div.style.left = old_pos[index].left + ev.clientX * div.style.zIndex / 50 + 'px';
+                div.style.top = old_pos[index].top + ev.clientY * div.style.zIndex / 50 + 'px';
+            });
+        }
+    }
+</script>
+</html>

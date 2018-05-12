@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title></title>
+    <script src="./hammer.js"></script>
+    <script src="http://wechatfe.github.io/vconsole/lib/vconsole.min.js?v=3.0.0.0" charset="utf-8"></script>
+    <style media="screen">
+      .box{
+        width: 200px; height: 200px; background: #ccc;
+        margin: 100px auto 0;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = () => {
+        // window.vConsole = new window.VConsole();
+        let oBox = document.querySelector('.box')
+        let hammer = new Hammer(oBox)
+        hammer.on('tap', (ev) => {
+          console.log(ev.center)
+        })
+
+        hammer.on('swipeleft', (ev) => {
+          console.log('swipe left')
+        })
+        hammer.on('swiperight', () => {
+          console.log('swipe right')
+        })
+        hammer.on('swipeup', () => {
+          console.log('swipe up')
+        })
+        hammer.on('swipedown', () => {
+          console.log('swipe down')
+        })
+
+        hammer.on('panleft', () => {
+          console.log('pan left')
+        })
+
+        hammer.on('panright', () => {
+          console.log('pan right')
+        })
+
+        hammer.on('panup',() => {
+          console.log('pan up')
+        })
+
+        hammer.on('pandown', () => {
+          console.log('pandown')
+        })
+
+        console.log(hammer)
+
+      }
+    </script>
+  </head>
+  <body>
+    <div class="box">
+
+    </div>
+  </body>
+</html>

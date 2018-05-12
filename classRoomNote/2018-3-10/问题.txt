@@ -1,0 +1,14 @@
+淘宝网动态设置viewport的scale的目的是什么，比如当devicePixeRatio = 3时，
+代替rem
+font-size: 20px;
+
+JS:
+  document.documentElement.style.fontSize=clientWidth/10+'px';
+
+scale：
+  scale=1.0   320
+  scale=1.125 360
+
+--------------------------------------------------------------------------------
+
+老师你这里的手势动作都是计算的前两个手指，加入我一次按下了三个，移动了一段时间，松开了前面一个手指，再移动不会出错吗

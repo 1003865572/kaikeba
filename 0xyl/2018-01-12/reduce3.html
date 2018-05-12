@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+    let arr=[12,5,88,37,21,91,17,24];
+
+    // let ave=arr.reduce((tmp,item,index)=>{
+    //   if(index<arr.length-1){
+    //     return tmp+item;
+    //   }else{    //最后一次迭代
+    //     return (tmp+item)/arr.length;
+    //   }
+    // });
+
+        // 只返回 循环最后一次的结果
+        // let as = arr.reduce((tmp,item,index)=>{
+        //     if(index < arr.length -1){
+        //         return tmp + item;
+        //     }
+        //     // else{
+        //     //     return tmp / arr.length;
+        //     // }
+        // })
+        // console.info(as);
+
+            // 每次循环 保留上次计算 item 得出的值
+        let arr2 = [18, 67, 98, 12];
+        console.log(
+        arr2.reduce((item, i) => {
+            console.log(item, i)
+            return item+1
+        })
+        )
+
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

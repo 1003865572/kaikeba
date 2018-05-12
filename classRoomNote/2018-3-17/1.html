@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    div {width:200px; height:200px; position:absolute;}
+    </style>
+    <script>
+    window.onload=function (){
+      let aDiv=document.getElementsByTagName("div");
+      let oldPos=Array.from(aDiv).map(div=>{
+        return {
+          left: div.offsetLeft,
+          top: div.offsetTop
+        };
+      });
+
+      document.onmousemove=function (ev){
+        Array.from(aDiv).forEach((div,index)=>{
+          div.style.left=oldPos[index].left+ev.clientX*div.style.zIndex/50+'px';
+          div.style.top=oldPos[index].top+ev.clientY*div.style.zIndex/50+'px';
+        });
+      };
+    };
+    </script>
+  </head>
+  <body>
+    <div style="left:100px; top:100px; background:green; z-index:1"></div>
+    <div style="left:350px; top:150px; background:yellow; z-index:2"></div>
+    <div style="left:50px; top:320px; background:#CCC; z-index:3"></div>
+    <div style="left:450px; top:200px; background:pink; z-index:4"></div>
+  </body>
+</html>

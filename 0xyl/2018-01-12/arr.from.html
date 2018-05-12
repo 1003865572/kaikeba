@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      div {width:200px; height:200px; background:#CCC; float:left; margin:10px;}
+    </style>
+    <script>
+    window.onload=function (){
+      let aDiv=document.getElementsByTagName('div');
+
+      //使用 Array.from 将 html 数组变成 js 数组
+        Array.from(aDiv).forEach(item=>{
+            console.info(item);
+            item.style.backgroundColor='red';
+        });
+
+    };
+    </script>
+  </head>
+  <body>
+    <div class=""></div>
+    <div class=""></div>
+    <div class=""></div>
+    <div class=""></div>
+    <div class=""></div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+    function d2a(n){
+      return n*Math.PI/180;
+    }
+    window.onload=function (){
+      let oP=document.getElementById('p1');
+
+      let cx=400,cy=300,r=200;
+      let ang1=20,ang2=360;
+      let arr=[];
+
+      function getPoint(ang){
+        return {
+          x: cx+Math.sin(d2a(ang))*r,
+          y: cy-Math.cos(d2a(ang))*r,
+        }
+      }
+
+      //#1
+      let {x: x1, y: y1}=getPoint(ang1);
+
+      arr.push(`M ${cx} ${cy} L ${x1} ${y1}`);
+
+      //#2
+      let {x: x2, y: y2}=getPoint(ang2);
+      //        A  rx   ry  x旋转 大弧 镜像 终点x    y
+      //arr.push(`A ${r} ${r}   0    0    1   ${x2} ${y2}`);
+      arr.push(`A ${r} ${r} 0 ${ang2-ang1>=180?1:0} 1 ${x2} ${y2}`);
+
+      //#3
+      arr.push('Z');
+
+      console.log(arr.join(' '));
+
+      oP.setAttribute('d', arr.join(' '));
+    };
+    </script>
+  </head>
+  <body>
+    <svg width="800" height="600">
+      <path id="p1" d="" style="stroke:red; fill:none"></path>
+    </svg>
+  </body>
+</html>

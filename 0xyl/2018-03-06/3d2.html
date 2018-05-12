@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>3d</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .parent{
+            transform: perspective(700px) rotateX(0edg) rotateY(0);
+            transform-style: preserve-3d;
+            width:200px;
+            height:200px;
+            position:relative;
+            margin: 150px auto 0;
+            transition:5s all ease;
+        }
+        .parent div{
+            width:198px;
+            height:198px;
+            position:absolute;
+            top: 0;
+            left: 0;
+            background:  aqua;
+            opacity: 0.7;
+            border: 1px solid black;
+            text-align: center;
+            line-height:198px;
+        }
+        .parent:hover{
+            transform: perspective(700px) rotateX(360deg) rotateY(180deg);
+        }
+        .front{
+            transform: translateZ(100px);
+        }
+        .back{
+            transform: translateZ(-100px);
+        }
+        .left{
+            transform: rotateY(90deg) translateZ(100px);
+        }
+        .right{
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+        .top{
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+        .down{
+            transform: rotateX(90deg) translateZ(100px);
+        }
+    </style>
+</head>
+<body>
+        <div class="parent">
+            <div class="front">前</div>
+            <div class="back">后</div>
+            <div class="left">左</div>
+            <div class="right">右</div>
+            <div class="top">上</div>
+            <div class="down">下</div>
+        </div>
+</body>
+</html>

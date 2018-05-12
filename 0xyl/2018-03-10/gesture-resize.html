@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>gesture</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <style media="screen">
+        body{
+            height:2000px;
+        }
+        .box {
+            width:200px; 
+            height:200px; 
+            background:#CCC; 
+            border:1px solid black; 
+            position:absolute; 
+            line-height:200px; 
+            text-align:center; 
+            font-size:40px; 
+            left:50%; top:150px; 
+            margin-left:-100px; 
+            transform:scale(1);
+        }
+        .xbox {
+            width:100px; 
+            height:100px; 
+            background: #23fd;; 
+            border:1px solid black; 
+            position:absolute; 
+            line-height:100px; 
+            text-align:center; 
+            font-size:20px; 
+            left:10%; top:10px; 
+            transform:scale(1);
+        }
+        
+    </style>
+</head>
+<script>
+    function calcDistance(touch1,touch2) {
+        let x = Math.pow(touch1.clientX - touch2.clientX , 2);
+        let y = Math.pow(touch1.clientY - touch2.clientY , 2);
+        return Math.sqer(x , y);
+    }
+    window.onload = function (){
+        let scale = 1.0 ,old_scale;
+        let dis1,dis2;
+
+        let box = document.getElementsByClassName('box')[0];
+
+        document.addEventListener('touchstart',function (ev){
+            // console.log(ev.targetTouches.length);
+            if(ev.targetTouches.length >= 2){
+                dis1 =  calcDistance(ev.targetTouches[0],ev.targetTouches[1]);
+                old_scale = scale;
+            }
+        },false);
+
+        document.addEventListener('touchmove',function(ev){
+            if(ev.targetTouches.length >= 2){
+                dis2 = calcDistance(ev.targetTouches[0],ev.targetTouches[1]);
+
+                scale = old_scale * dis2 / dis1;
+                console.log(scale);
+                box.style.transform = `scale(${scale})`;
+            }
+        },false);
+    };
+</script>
+<body>
+    <div class="box">123wd</div>
+    <div class="xbox">asdaswe</div>
+</body>
+
+</html>
