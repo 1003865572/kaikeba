@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=q&cb=show
+        function show (json) {
+            console.log(json.s);
+            var oUL = document.getElementById('ul');
+            oUL.innerHTML = '';
+            json.s.forEach(text => {
+                var oLi = document.createElement('li');
+                oLi.innerHTML = text;
+                oUL.appendChild(oLi);
+            })
+        }
+        window.onload = function () {
+            var oText1 = document.getElementById('c1');
+            oText1.oninput = function () {
+                console.log(oText1.value);
+                var so = document.createElement('script');
+                so.src = `https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${oText1.value}&cb=show`
+                document.head.appendChild(so);
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="c1" />
+    <ul id="ul">
+
+    </ul>
+</body>
+</html>
