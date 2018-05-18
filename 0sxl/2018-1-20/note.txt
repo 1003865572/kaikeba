@@ -29,3 +29,24 @@ jsonp 跨域
     multipart/form-data                 文件上传
 
 --------------------------------------------------------------------
+
+node 服务器
+
+主要是依赖 nodejs 下的 http 模块实现。
+
+var http = require('http');
+
+var server = http.createServer((request, response) => {
+    response.write('text ...');
+    response.end();
+})
+server.listen(8080);
+
+
+--------------------------------------------------------------------
+
+nodejs 三大特性
+事件轮询，非阻塞IO，单线程
+
+--------------------------------------------------------------------
+
