@@ -1,3 +1,46 @@
 Nodejs 常用模块
 1. http 模块 -- web服务
-2. assert 断言模块 -- 及其有用  项目中多加这样的代码保证代码质量
+
+2. assert 断言模块 -- 及其有用 项目中多加这样的代码保证代码质量
+
+3. 二进制--buffer
+    fileSystem
+        同步文件操作
+        异步文件操作
+4. c++ addons   nodejs 运行环境中执行 c++ 代码
+
+5. 进程
+    js 单进程，单线程
+    nodejs 多进程，单线程
+    多进程的实现 模块依赖
+    Child Processes
+    Cluster
+    Process
+
+6.  Crypto  加密 签名算法
+
+3. os 获取程序运行的系统信息
+4. path 路径模块
+5. Events 事件队列
+    会被 promise 替换（改为同步写法 async）
+6. queryString  帮助解析 url ? 号后面的 GET 参数
+    url 帮助解析 url 和 url 中的参数 （如果 parse 的第二个参数是 true 就会自动解析 url 中的 GET 参数）
+        url.parse('url', true)
+7. 网络
+    tcp 稳定  对应的 nodejs 模块  Net
+        不会出错（信息是有序的）（应用场景：游戏，下载资源）
+    udp 快    对应的 nodejs 模块 UDP/Datagram
+        信息是无序的 会丢失（应用场景：直播，实时语音）
+8. stream 流操作
+    什么是流，视频，音频，网络传输数据
+
+9.  TLS/SSL 加密
+
+10.TTY
+
+11. ZLIB -- gz
+    压缩
+
+
+12.
+
