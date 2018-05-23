@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const http=require('http');
 const io=require('socket.io');
 
@@ -34,3 +35,41 @@ wsServer.on('connection', sock=>{
 setInterval(function (){
   console.log(aSock.length);
 }, 500);
+=======
+const http=require('http');
+const io=require('socket.io');
+
+let httpServer=http.createServer((req, res)=>{
+
+});
+httpServer.listen(8080);
+
+//
+let wsServer=io.listen(httpServer);
+
+let aSock=[];
+wsServer.on('connection', sock=>{
+  aSock.push(sock);
+
+  //断开连接
+  sock.on('disconnect', ()=>{
+    let n=aSock.indexOf(sock);
+
+    if(n!=-1){
+      aSock.splice(n, 1);
+    }
+  });
+
+  sock.on('msg', str=>{
+    aSock.forEach(s=>{
+      if(s!=sock){
+        s.emit('msg', str);
+      }
+    });
+  });
+});
+
+setInterval(function (){
+  console.log(aSock.length);
+}, 500);
+>>>>>>> 3a8e24d65a75c6e257e09d9fb72582456df2b792
