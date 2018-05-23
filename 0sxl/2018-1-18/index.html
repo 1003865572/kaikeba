@@ -5,28 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.js"></script>
     <script>
-        var xhr = new XMLHttpRequest();
-        console.log(xhr.readyState);
-        // 连接
-        xhr.open('GET', '1.php?a=10&b=5');
-        console.log(xhr.readyState);
-        // 发送
-        xhr.send();
-        // 接受
-        xhr.onreadystatechange = function (e) {
-            // console.log(xhr.readyState);
-            if (xhr.readyState === 4) {
-                if (xhr.status >=200 && xhr.status < 300 || xhr.status === 304) {
-                    console.log('success', xhr.responseText, xhr);
-                } else {
-                    console.log('fail', xhr);
-                }
+        $(function() {
+            var f = document.querySelectorAll.bind(document)
+            var btn1 = f('#btn1')[0];
+            btn1.onclick = function () {
+                $.ajax({
+                    url: '1.php',
+                    data: {a:2, b: Math.random() * 20},
+                    type: 'GET',
+                    dataType: 'text',
+                    success(str) {
+                        console.log(str);
+                    }, 
+                    error() {
+                        console.log('error')
+                    }
+                })
             }
-        }
+        })
     </script>
 </head>
 <body>
-    
+    <button id="btn1" > 提交 </button>
 </body>
 </html>

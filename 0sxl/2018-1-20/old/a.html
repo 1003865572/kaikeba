@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var xhr = new XMLHttpRequest();
+        console.log(xhr.readyState);
+        // 连接
+        xhr.open('GET', '1.php?a=10&b=5');
+        console.log(xhr.readyState);
+        // 发送
+        xhr.send();
+        // 接受
+        xhr.onreadystatechange = function (e) {
+            // console.log(xhr.readyState);
+            if (xhr.readyState === 4) {
+                if (xhr.status >=200 && xhr.status < 300 || xhr.status === 304) {
+                    console.log('success', xhr.responseText, xhr);
+                } else {
+                    console.log('fail', xhr);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

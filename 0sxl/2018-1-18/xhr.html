@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = () => {
+            let btn1 = document.querySelectorAll('#btn1')[0];
+            btn1.onclick = function () {
+                let xhr = new XMLHttpRequest();
+
+                xhr.open('GET', '1.php?a=2&b=53');
+                xhr.send();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            console.log('正确：', xhr.responseText);
+                        }
+                    }
+                }
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">提交</button>
+    <form action="" enctype="application/x-www-form-urlencoded"></form>
+</body>
+</html>
