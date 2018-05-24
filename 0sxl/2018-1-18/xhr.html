@@ -7,6 +7,14 @@
     <title>Document</title>
     <script>
         window.onload = () => {
+            var $ = document.querySelectorAll;
+            
+            if (window.XMLHttpRequest) {
+                var xhr = new XMLHttpRequest()
+            } else {
+                var xhr = new ActiveXObject('Micorsoft.XMLHttp')
+            }
+
             let btn1 = document.querySelectorAll('#btn1')[0];
             btn1.onclick = function () {
                 let xhr = new XMLHttpRequest();
@@ -20,13 +28,11 @@
                         }
                     }
                 }
-
             }
         }
     </script>
 </head>
 <body>
     <button id="btn1">提交</button>
-    <form action="" enctype="application/x-www-form-urlencoded"></form>
 </body>
 </html>

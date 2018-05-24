@@ -1,16 +1,46 @@
 ------------------------------------------------------
 10个问题
 1. 常用的表单提交方式都有哪些
+    GET POST DELETE UPT
 2. from 的 enctype 都有哪些值，都是干什么用的
+    application/x-www-form-urlencoded  提交普通请求：登录
+    multipart/form-data                上传文件 最大 1G
+    text/plain                         提交文本
 3. 什么是转发，什么是重定向
+    转发： 服务器内部完成，前端访问接口 --> 服务端接收到-->转发给其他服务
+    重定向：在客户端完成， 301 永久重定向 302 临时重定向 304 临时重定向（去缓存中查找）
 4. xhr 的兼容 ie6 写法
+    if (widnow.XMLHttpRequest) {
+        var xhr = new XMLHttpRequest();
+    } else {
+        var xhr = new ActiveXObject('Micorsoft.XMLHttp');
+    }
 5. xhr 都有哪些通信状态
-6. xhr 的常用状态都有哪些，都是什么意义
+    0 创建
+    1 连接
+    2 开始发送
+    3 接收 - header
+    4 接收 - body
+6. xhr HTTP 的常用状态都有哪些，都是什么意义
+    200 
+    301
+    302
+    304
+    404
+    403
+    500
+    502
+    503
 7. OSI七层都是什么
 8. 五层模型
-9. TCP， UDP 都是什么，有什么区别
+9. TCP，UDP 都是什么，有什么区别
+    TCP 传输内容是有序的，速度慢（下载，游戏）
+        点对点，传输
+    UDP 传输内容无序，速度快（直播，语音通话）
+        广播
 10. this 指针是怎么被改变的，如何必变
-
+    var $ = document.querySelectorAll;
+        $ 的 this 指向 window，此时 $ 不能再选择 dom 元素了
 ------------------------------------------------------
 表单
 
@@ -23,7 +53,7 @@ method  提交方式： GET, PUT, DELTE, HEAD
 表单提交的方法
 
 GET 数据在 url 中
-    1. 容量有限
+    1.容量有限
     2.数据可见
     3.有缓存
 POST    数据在 htpp-body 中
