@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ajax</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <input type="text" name="user" id="user">
+    <input type="text" name="pass" id="pass">
+    <input type="file" name="fule_inp" id="fuleId">
+    <input type="button" value="提交" id="sub">
+</body>
+<script>
+    window.onload = function () {
+        let sub = document.getElementById('sub');
+        let user = document.getElementById('user');
+        let pass = document.getElementById('pass');
+        let fuleId = document.getElementById('fuleId');
+        
+        sub.onclick = function(){
+            let data = new FormData();
+            let xhr = new XMLHttpRequest();
+
+            data.set('user', user.value);
+            data.set('pass', pass.value);
+
+            Array.from(fuleId.files).forEach((file)=>{
+                console.log(file);
+                data.append('fi', file);
+            });
+
+            xhr.open('POST','/api');
+            xhr.send(data);
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(xhr.status >= 200 && xhr.status < 300 || xhr.status == 304){
+                        alert('成功');
+                    }else{
+                        alert('失败');
+                    }
+                }
+            }
+        }
+    }
+
+</script>
+</html>

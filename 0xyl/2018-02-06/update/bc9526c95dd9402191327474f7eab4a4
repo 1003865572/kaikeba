@@ -1,0 +1,75 @@
+
+====================2017-03-23
+react笔记
+	代码请求流程
+	1.components =》调用actions里面的方法
+	2.在actions里创建外部可调用的方法
+	3.在actionTypes里定义action的类型
+	4.在containers里的mapDispatchProps函数里调用action的方法
+	5.在sagas的fetchWatcher的函数中定义ActionType的请求对应的function
+	6.在对应的function里调用api接口并获取返回值
+	7.（页面渲染）调用data.resolve()函数
+	8.（页面渲染）在reducers的diskReduer的switch语句中定义ActionTypes处理数据返回到前段
+	9.（页面渲染）前段调用.then方法获取后台返回的数据渲染页面
+
+【学英语项目-->后台语音列表需求】
+字段：	id
+	date
+	url
+	length
+	description
+	comments_id
+每个语音对象创建的时候，要同时 创建出评论对象
+
+	
+
+
+mysql 权限
+ 
+  ----- 创建用户  用户名为 shiyalong  密码 root  ， *.*  第一个星 代表所有数据库的权限
+	
+	grant all privileges on *.* to shiyalong@'%'identified by 'root'; 
+刷新权限 立即生效
+	flush privileges; 
+
+linux 开放3306端口
+
+request.getSession().getServletContext().getRealPath("/") //获取tomcat的绝对路径
+
+宽带账号  ：090011489219
+ 密码	  ：nn939058
+
+
+
+
+
+  健康检查
+
+56  Profile
+
+41  负载均衡   Pool
+
+132  会话保持
+
+144  Monitor（监控）
+
+
+集群简介---
+
+	集群存在的意义---
+	
+        F5提供的解决方案保证每个用户的应用实现安全、高速和高可用，帮企业获得最大投资回报。通过在网络中增加智能和可管理性而降低应用的负荷，
+    F5使应用得以优化，从而提高运行速度，并降低资源消耗。
+
+
+集群主要功能---
+
+	负载均衡   Pool
+	会话保持
+	健康检查
+	Monitor（监控）
+
+集群的运行状态--- 
+
+	
+	本次用时16.5m，总排行第 10 名 与上次相比上涨了 5名 ，出错率为 0 次 继续加油
