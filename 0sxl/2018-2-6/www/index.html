@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var name = document.querySelectorAll('#name')[0];
+            var pass = document.querySelectorAll('#pass')[0];
+            let file = document.querySelectorAll('#file')[0];
+            var btn1 = document.querySelectorAll('#btn1')[0];
+
+            btn1.onclick = function () {
+                let data = new FormData();
+                console.log(name.value);
+                var xhr = new XMLHttpRequest();
+                data.set('name', name.value);
+                data.set('pass', pass.value);
+                Array.from(file.files).forEach(item => {
+                    data.append('file', item);
+                })
+                xhr.open('POST', './api');
+                xhr.send(data);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if ((xhr.status > 200 && xhr.status < 300) || xhr.status === 304) {
+                            console.log(xhr.responseText);
+                        } else {
+                            console.log('失败');
+                        }
+                    }
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <input type="text" name="name" id="name" value="name123" ><br />
+        <input type="text" name="pass" id="pass" value="pass123" ><br />
+        <input type="file" name="file" id="file" multiple ><br />
+        <button id="btn1">提交</button>
+    </div>
+</body>
+</html>
