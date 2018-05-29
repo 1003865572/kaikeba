@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            let img = document.getElementsByTagName('img')[0];
+            img.onmousedown = function (e) {
+                //防止浏览器默认行为(W3C)  
+                e.preventDefault();  
+                return false
+                //IE中组织浏览器行为  
+                // else{  
+                //     window.event.returnValue=false; //实际上在IE8以下，会报错
+                //     return false; 
+                // }  
+            }
+            
+            let div1 = document.getElementById('div1');
+            let btn2 = document.getElementById('btn2');
+            
+            div1.onclick = function () {
+                console.log('向下冒泡')
+            }
+            btn2.onclick = function (e) {
+                console.log('向上冒泡', e);
+                e.stopPropagation();
+            }
+        }
+    </script>
+</head>
+<body>
+    <style>
+        #div2{
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+        }
+    </style>
+    <div id="div1">
+        <button onclick="alert('点击了 button ')">向下冒泡</button>
+    </div>
+    <div id="div2" onclick="alert('点击了 div')">
+        <button id="btn2">向上冒泡</button>
+    </div>
+    <div>
+        默认行为
+        <img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2401881700,2342273471&fm=58"/>
+    </div>
+</body>
+</html>

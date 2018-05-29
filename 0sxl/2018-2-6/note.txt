@@ -1,4 +1,28 @@
 --------------------------------------------------------------
 10 个问题
 1. FormDate 到底是什么
+    FormDate： json + file
+    用来模拟 form 提交时的数据
 2. FormDate 都有哪些常用方法，有哪些应用场景
+
+    append  为一个 key 增加多个值（Array.push）
+    get     获取 formData 对象中的某个 key 的值
+    set     设置 某个 key 的值
+    delete  删掉某个 key
+    forEach 便利所有的 key
+
+3. 对跨域的理解
+    浏览器规定的跨域这个概念，保护数据安全。服务器在不被允许的情况下被其他站点访问
+    setHeader(“Access-Control-Allow-Origin”， “*”) 解决
+
+4. 退拽事件 都有哪些， 以及对这些事件的理解
+    ondragenter 拖动文件 移入节点
+    ondraglive  拖动文件 移除节点
+    ondragover  拖动文件 移入节点，没有松手之前， 需要阻止默认事件
+        return false;
+        ev.preventDefault();
+    ondrop      
+        拖动文件 移入节点，松手 需要阻止默认事件
+        return false;
+        ev.preventDefault();
+        
