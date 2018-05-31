@@ -1,0 +1,5 @@
+1. ajax 2.0 获取上传文件的方法. xhr.upload.onprogress 方法必须放在 xhr.send() 之前 
+
+2. xhr.upload.onprogress 添加了这个事件之后，浏览器会像服务器发送两个请
+    当前ajax 定义的请求（POST） 和 OPTIONS 请求
+    所以，服务器端要有可以处理 OPTIONS 请求的能力

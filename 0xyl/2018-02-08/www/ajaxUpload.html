@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ajax</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+    .parent{
+        width: 500px;
+        height: 30px;
+    }
+    .child{
+        height: 30px;
+        width: 0px;
+        background: green;
+    }
+</style>
+<body>
+    <input type="file" name="fule_inp" id="fuleId">
+    <input type="button" value="提交" id="sub">
+    <div class="parent">
+        <div class="child"></div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        let sub = document.getElementById('sub');
+        let fuleId = document.getElementById('fuleId');
+        
+        sub.onclick = function(){
+            let data = new FormData();
+            let xhr = new XMLHttpRequest();
+
+            Array.from(fuleId.files).forEach((file)=>{
+                console.log(file);
+                data.append('fi', file);
+            });
+
+            xhr.open('POST','http://localhost:8080/api');
+
+            xhr.upload.onprogress = function(ev){
+                ev.total; //总大小
+                ev.loaded;//已完成
+                console.log(ev.total / ev.loaded);
+                let child = document.getElementsByClassName('child')[0];
+                child.style.width = `${100* (ev.loaded / ev.total)}%`;
+            }
+
+            xhr.send(data);
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(xhr.status >= 200 && xhr.status < 300 || xhr.status == 304){
+                        alert('成功');
+                    }else{
+                        alert('失败');
+                    }
+                }
+            }
+        }
+    }
+
+</script>
+</html>
