@@ -46,12 +46,12 @@
 
             let timer = null
             document.addEventListener('dragover', function (ev) {
+                ev.preventDefault();
                 oBox.style.display = 'block';
                 clearTimeout(timer)
                 timer = setTimeout(function() {
                     oBox.style.display = 'none';
                 }, 300)
-                ev.preventDefault();
             }, false)
             
             oBox.addEventListener('dragenter', function (ev) {
