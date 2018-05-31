@@ -2,10 +2,44 @@
 10 个问题
 1. 口述上传进度的实现过程
     前端：
+        在 new XMLHttpRequest() 和 open 之间 调用 xhr.upload.onprogress 函数
+        xhr.upload.onprogress = (ev) => {
+            (ev.loaded / ev.total) * 100
+        }
     后端：
+        必须实现 OPTIONS method
+        必须实现，本次上传 api 的 method 
+
 2. 上传过程的写法
+
 3.如何判断是否是 ajax2.0
     ajax.upload
 4. chrome 模拟网速
+    DevTools --> NetWork --> tools(offline) 下拉选择 --> Add --> Add custom profile
+
 5. base64的理解
+    所有的二进制文件都可以 转换为16进制文件， 这就是 base64, 浏览器可以主动识别 base64 编码
 6. base64的使用场景
+    文件过小，比如 icon 图片， 不需必要再发一次预览请求，因为浏览器发送请求的并发数量 目前最多的就是 8 个。
+    尽量的减少并发量，可以优化首屏加载速度。
+
+7.实现 拖拽， 挑选， 上传
+
+8.readFile 的理解
+    题共 file 对象，（file 对象包含路径）。
+    let reader = new ReadFile();
+    reader.onload = function () {
+
+    }
+    reader.readAsXXX 提供多种读取方式
+    readAsText 读取文本文件
+    readAsDataURL 最有用 把文件读取为 base64 编码
+    readAsArrayBuffer()     把文件读取为二进制数组
+9.readFile 使用
+    let reader = new ReadFile();
+    reader.onload = function () {
+
+    }
+    reader.readAsXXX 提供多种读取方式
+10.addEventListener 函数中最后的 false 有什么用
+    阻止事件冒泡
