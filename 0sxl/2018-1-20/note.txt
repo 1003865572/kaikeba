@@ -1,0 +1,16 @@
+------------------------------------------------------
+10个问题
+
+1. post 发送数据的时候 send 为什么是接收的 & 符号链接后的参数
+2. js 内存泄露， 内存释放
+    内存泄露
+        function addHandler() {
+            var el = document.getElementById('el');
+            el.onclick = function() {
+                // 这里会造成内存泄露，el 应该被释放掉。但是他现在继续被引用无法释放。这就是内存泄露
+                el.style.backgroundColor = 'red';
+            }
+        }
+    内存释放: 把变量 赋值 为 null 即可
+        var el = null;
+3. eval 用法
