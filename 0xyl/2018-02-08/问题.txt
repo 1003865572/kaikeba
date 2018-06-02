@@ -1,5 +1,37 @@
-1. ajax 2.0 获取上传文件的方法. xhr.upload.onprogress 方法必须放在 xhr.send() 之前 
+1. ajax 2.0 获取上传进度文件的方法. 
+    xhr.upload.onprogress 方法必须放在 xhr.send() 之前 
+    onprogress 事件对象的 
+    ev.total 总大小
+    ev.loaded 已完成
 
 2. xhr.upload.onprogress 添加了这个事件之后，浏览器会像服务器发送两个请
     当前ajax 定义的请求（POST） 和 OPTIONS 请求
     所以，服务器端要有可以处理 OPTIONS 请求的能力
+
+3.元素拖动事件
+    在拖动目标上触发事件 (源元素):
+        1.ondragstart 当用户开始拖动元素时触发
+        2.ondrag 元素正在拖到时触发
+        3.ondragend 用户鼠标松开（拖动完成）触发
+
+    释放目标时触发的事件:
+        4.ondragenter 当元素被鼠标拖动到事件DOM对象进入其容器范围内时出发此事件
+        5.ondragover 当元素拖动到DOM对象上 鼠标没有松开时，此事件会一直触发
+            -| ev.preventDefault(); 执行此方法 阻止浏览器的默认事件
+        5.ondragleave 拖动对象离开其容器范围内拖动时出发此事件
+        6.ondrop 在拖动到DOM事件对象内鼠标松开，执行此方法
+            -| ev.preventDefault(); 执行此方法 阻止浏览器的默认事件
+4.FileReader用法：
+    let fileReader = new FileReader()
+
+    先添加 fileReader.onload 事件 fileReader.result 返回读取文件的结果
+    再添加 reader.readAsText
+
+    当read事件完成后就会出发 onload 事件
+
+5. addEventListener 的作用  false 阻止事件冒泡
+    这种方式可以为元素添加多个事件    
+
+6. chrome 模拟网速的方法
+    打开 F12 点击NetWork  点击第一行的Online
+    在Custom 点击add 在跳转打开的页面中点击 Add custom profile

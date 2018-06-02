@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>拖拽上传</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+    * {
+        list-style: none;
+    }
+    ul li img {
+        width: 300px;
+        height: 200px;
+    }
+    ul li {
+        float: left;
+    }
+    ul {
+        overflow: hidden;
+    }
+    #div1{
+        background: green;
+        border: 1px black solid;
+        width: 400px;
+        height: 300px;
+        margin: 0 auto;
+        margin-top: 100px;
+        line-height: 300px;
+        text-align: center;
+    }
+    .parent {
+        width: 300px;
+        height: 50px;
+        border: 1px solid black;
+    }
+    .child {
+        background: blue;
+        height: 50px;
+        width: 0px;
+    }
+</style>
+<body>
+    <ul id="img_list">
+        <!-- <li>
+            <img src="IMG_0314.JPG">
+            <a href="javascript:">删除</a>
+        </li> -->
+    </ul>
+    <div id="div1">
+        文件拖拽至此
+    </div>
+    <button type="button" id="uploadFileBtn">上传</button>
+    <div class="parent">
+        <div class="child"></div>
+    </div>
+</body>
+<script>
+    window.onload = function(){
+        let div1 = document.getElementById('div1');
+        let oUl = document.querySelector('#img_list');
+        let btn = document.querySelector('#uploadFileBtn');
+        
+        div1.addEventListener('dragenter',function(){
+            this.innerHTML = '松手上传';
+        },false);
+
+        div1.addEventListener('dragover',function(ev){
+            ev.preventDefault();
+            this.innerHTML = '轻松手';
+        },false);
+        
+        div1.addEventListener('dragleave',function(){
+            this.innerHTML = '离开了';
+        },false);
+
+        div1.addEventListener('drop',function(ev){
+            ev.preventDefault();
+            let file = ev.dataTransfer.files;
+
+            for(let i =0;i < file.length;i++){
+
+                let Uli = document.createElement('li');
+                Uli.file = file[i];
+                let Uimg = document.createElement('img');
+                let Ua = document.createElement('a');
+                Ua.innerHTML = '删除';
+                Ua.href = 'javascript:;';
+                
+                let read = new FileReader();
+
+                read.onload = function(){
+                    Uimg.src = read.result;
+                    Uli.appendChild(Uimg);
+                    Uli.appendChild(Ua);
+                    
+                    Ua.onclick = function (){
+                        oUl.removeChild(this.parentElement);
+                    }
+                    oUl.appendChild(Uli);
+                }
+                read.readAsDataURL(file[i]);
+            }
+        },false);
+
+        btn.addEventListener('click',function (){
+            // console.log(oUl.children[0].file);
+
+            let data = new FormData();
+            
+            if(oUl.children.length == 0){
+                alert('请选择要上传文件');
+                return false;
+            }
+            Array.from(oUl.children).forEach((file)=>{
+                data.append('f1',file.file);
+            });
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open('POST','http://localhost:8080/api');
+
+            xhr.upload.onprogress = function(ev){
+                let child = document.querySelectorAll('.child')[0];
+                child.style.width = `${100 * ev.loaded/ev.total}%`;
+                console.log(100 * ev.loaded/ev.total + '：进度值');
+            }
+            
+            xhr.send(data);
+            
+            xhr.onreadystatechange = ()=>{
+                if(xhr.readyState == 4){
+                    if(xhr.status >= 200 && xhr.status <= 300 || xhr.status == 304){
+                        alert('上传成功');
+                        let child = document.querySelectorAll('.child')[0];
+                        child.style.width = `0%`;
+                    }else{
+                        alert('上传失败');
+                    }  
+                }
+            }
+
+        },false);
+    }
+</script>
+</html>
