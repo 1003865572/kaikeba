@@ -1,9 +1,24 @@
 ----------------------------------------------------------------
 10 个问题
-1. webWorker
+1.webWorker
+    说明：浏览器多进程，不能执行dom 操作，可用来解耦。比如复杂的计算为了不阻塞浏览器。
+可以使用多进程。把任务分给进程去执行。
+    遵循同源策略
+    基本用法
+        let oW = new Worker('js ')
+        oW.onMessage = function (ev) {
+            ev.data 代表 进程向你通信
+        }
+        oW.postMessage() //向 进程通信
 2.文件操作， 拖拽事件
-3.geolocation
-4.manifest
-5.调用手机 陀螺仪
-6.sharedWork
-7.如何获取浏览器 内核信息
+3.manifest
+4.调用手机 陀螺仪
+5.sharedWork
+6.如何获取浏览器 内核信息
+7.canvas 基本操作
+    getContext('2d') 获取到 canvas 2d 的操作对象
+    moveTo(x,y) 开始画线前，要先找准下笔的位置
+    lineTo(x,y) 开始绘制路径，但是没有颜色。
+    closePath() 在计算机逻辑中 闭合路径
+    stroke()    描线
+    fill()      填充颜色

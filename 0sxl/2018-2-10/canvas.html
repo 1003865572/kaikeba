@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background: #000;
+            text-align: center;
+        }
+        canvas {
+            background: #fff;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let canvasEml = document.getElementById('canvas1');
+            let gd = canvasEml.getContext('2d');
+
+            gd.moveTo(100, 100);
+            gd.lineTo(200, 100);
+            gd.lineTo(200, 200);
+            gd.lineTo(100, 200);
+            gd.lineWidth = 20
+            gd.closePath();
+            gd.stroke();
+            gd.fill()
+
+            // gd.stroke();
+            // gd.fill();
+        }
+    </script>
+</head>
+<body>
+    <canvas id="canvas1" width="800" height="600" />
+</body>
+</html>

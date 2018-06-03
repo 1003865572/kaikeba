@@ -7,15 +7,19 @@
     <title>Document</title>
     <script>
         window.onload = function () {
-            window.navigator.geolocation.getCurrentPosition(function (res) {
-                console.log(res);
-            })
+            let btn1 = document.querySelector('#btn1');
+            btn1.onclick = function () {
+                // console.log(navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(function (res) {
+                    console.log(res);
+                })
+            }
         }
     </script>
 </head>
 <body>
     
-    <input type="button" value="定位" />
+    <input type="button" value="定位" id="btn1"/>
 
 </body>
 </html>
