@@ -1,0 +1,12 @@
+1.localStore 使用方法
+    localStore 工作在域名下，每个域名都有单独的 localStore，域名之间不可共享
+    localStore.keys 获取所有的 key
+    delete localStore.key 删除 制定的 key 以及下面的值
+
+2.浏览器获取位置：geolocation
+
+3.Cookies 介绍
+
+4.WebWorkers js多进程
+
+5.

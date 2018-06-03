@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>canvas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+    <style>
+        body {
+            background: black;
+        }
+        #c1 {
+            margin: 0 auto;
+            background: azure;
+        }
+    </style>
+<body>
+    <canvas id="c1" width="400" height="500"></canvas>
+</body>
+<script>
+    window.onload = function(){
+        let c1 = document.getElementById('c1');
+
+        let gc = c1.getContext('2d');
+
+        gc.moveTo(100, 150);
+        gc.lineTo(325, 210);
+        gc.lineTo(225, 254);
+        gc.lineTo(124, 254);
+        gc.lineTo(100, 150);
+
+        gc.stroke();
+    }
+</script>
+</html>
