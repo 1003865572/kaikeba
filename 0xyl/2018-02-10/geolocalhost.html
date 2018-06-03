@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>geolocalhost</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <button type="button" id="btn">点击</button>
+</body>
+    <script>
+        let btn = document.getElementById('btn');
+        btn.onclick = function(){
+            console.log(window.navigator.geolocation.getCurrentPosition);
+            window.navigator.geolocation.getCurrentPosition(function(res){
+                console.log(res);
+                console.log(res.coords.latitude);
+                console.log(res.coords.longitude);
+                
+            });
+        }
+    </script>
+</html>

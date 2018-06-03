@@ -1,0 +1,69 @@
+1.xhr POST请求 需要添加Header，在open方法之后
+    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+2. 转义符使用方法
+    var a = "aaa\"aa";
+    console.log(a);
+
+3.单引号与双引号的区别
+    只有在JSON.parse()时 才有区别
+        var a = "{a:'1',b:'2'}";
+        console.log(JSON.parse(a));
+    控制台打印：
+        VM32:1 Uncaught SyntaxError: Unexpected token a in JSON at position 1
+        at JSON.parse (<anonymous>)
+        at 1.html:14
+
+        var a = '{"a":"1","b":"2"}';
+        console.log(JSON.parse(a));
+    控制台打印
+        {a: "1", b: "2"}
+
+4.this指针问题（this在什么情况下指向会改变）
+
+        var a = document.getElementById;
+        console.log(a('btn'));  
+    控制台打印
+        1.html:19 Uncaught TypeError: Illegal invocation
+        at 1.html:19
+    这个写法相当于把 'getElementById' 函数赋值给了 a 对象，此时 a 只是一个函数，并不属于 document  
+    所以在调用 a('btn') 方法时，就会出错
+
+        var a = document.getElementById;
+        a = a.bind(document);
+        console.log(a('btn'));
+    控制台打印
+        <input type="text" id="btn">
+    这个写法是把 a 绑定到了 document 上，此时就可以正确的获取到 document 中的 DOM
+
+5.js 或运算，and运算【短路计算】
+        
+        var a = null || 1;
+        console.log(a);
+    控制台打印
+        1
+
+        var a = null && 1;
+        console.log(a);
+    控制台打印
+        null
+    
+    && 运算
+    && 前面的表达式返回true 就取 && 后面的值
+    || 运算
+    与 && 相反 ||前面的表达式返回 true 就取 || 前面的指
+
+    在js 中为 false 的值: null 空字符串 NAN undefined
+
+6. js 释放内存
+    var a= 100;
+    a = null;
+    当把一个对象指向 null 的时候，就会释放掉该对象指向的内存空间
+7. js 内存泄漏
+    function addHandler() {
+        var el = document.getElementById('el');
+        el.onclick = function() {
+            //此时 el 已经指向了 DOM 中的对象，el 的存在已经没有意义了，可以把它释放掉 el = null，在下一行直接用 this 关键字操作 DOM
+            // this.style.backgroundColor = 'red';
+            el.style.backgroundColor = 'red';
+        }
+    }

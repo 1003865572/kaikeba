@@ -1,1 +1,3 @@
 1.xhr.send get 请求可以用它发送参数么？
+    如果是GET 请求 xhr.send 应该发送null 过去，如果是POST请求此方法是发送参数过去
+2.IE6 如何兼容XMLHTMLRequset ?

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>拖拽上传</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+    .div1 {
+        width: 400px;
+        height: 300px;
+        background: yellowgreen;
+        position: absolute;
+        margin: 150px 0 0 150px;
+        text-align: center;
+        line-height: 300px;
+    }
+</style>
+<body>
+    <div class="div1">
+        拖文件到此处
+    </div>
+</body>
+<script>
+    window.onload = function(){
+        let div1 = document.getElementsByClassName('div1')[0];
+
+// ondragenter  鼠标移入
+        
+        div1.ondragenter = function(){
+            div1.innerHTML = '松手上传';
+        }
+        // ondragleave
+        div1.ondragleave = function(){
+            div1.innerHTML = '请拖到这里';
+        }
+        // ondragover   //只要鼠标还没松手、并且还没离开，一直不停发生
+        div1.ondragover = function(){
+            console.log(1111);
+             //ondragover不阻止默认事件，ondrop不会触发
+            return false;
+        }
+        // ondrop
+        div1.ondrop = function(e){
+            // alert('松手');
+            console.log(e.dataTransfer.files);
+
+
+            let data = new FormData();
+            let xhr = new XMLHttpRequest();
+
+            Array.from(e.dataTransfer.files).forEach((file)=>{
+                console.log(file);
+                data.append('fi', file);
+            });
+
+            xhr.open('POST','/api');
+            xhr.send(data);
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(xhr.status >= 200 && xhr.status < 300 || xhr.status == 304){
+                        alert('上传成功');
+                        div1.innerHTML = '拖文件到此处';
+                    }else{
+                        alert('上传失败');
+                        div1.innerHTML = '拖文件到此处';
+                    }
+                }
+            }
+
+
+            return false;
+        }
+    }
+</script>
+</html>

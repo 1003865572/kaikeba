@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+    #div1 {
+        width: 400px;
+        height: 300px;
+        background: greenyellow;
+    }
+</style>
+<body>
+    <div id="div1">
+        <input type="button" value="事件" id="btn1">
+    </div>
+    <img id="img1" src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2121457518,3371358185&fm=173&app=25&f=JPEG?w=218&h=146&s=BCBB61948EDC2CCC1DB6C7CB0300A09F" alt="" srcset="">
+</body>
+<script>
+    window.onload = function(){
+        let div1 = document.getElementById('div1');
+        let btn = document.getElementById('btn1');
+        
+        div1.onclick = function(){
+            alert('点击了div');
+        }
+        btn.onclick = function (e){
+            alert('点击了Btn');
+            // return false;
+            // e.preventDefault();//阻止事件默认行为
+            e.stopPropagation(); //阻止默认事件
+        }
+        let img_a = document.getElementById('img1');
+
+        img_a.onmousedown = function(e){
+            // e.preventDefault();
+            console.log(111);
+            return false;
+        }
+
+    }
+
+</script>
+</html>
