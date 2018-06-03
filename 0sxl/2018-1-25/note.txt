@@ -1,0 +1,24 @@
+------------------------------------------------
+10 个问题
+1. get 请求为什么也能触发 request.on('end', () => {}) 函数
+2. 目前不能使用 new Buffer 官网提示可以 使用 Buffer.from()
+3. 手动实现一个 Buffer.splic 函数
+
+
+
+------WebKitFormBoundaryTIFfBGEySMLfAABn
+Content-Disposition: form-data; name="user"
+
+user1
+------WebKitFormBoundaryTIFfBGEySMLfAABn
+Content-Disposition: form-data; name="pass"
+
+pass2
+------WebKitFormBoundaryTIFfBGEySMLfAABn
+Content-Disposition: form-data; name="fl"; filename="note.txt"
+Content-Type: text/plain
+
+------------------------------------------------
+10 个问题
+1. get 请求为什么也能触发 request.on('end', () => {}) 函数
+------WebKitFormBoundaryTIFfBGEySMLfAABn--

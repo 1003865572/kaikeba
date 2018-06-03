@@ -15,7 +15,6 @@ server.use('/api', (req, res) => {
     console.log(req.method, req.url);
     res.setHeader('Access-Control-Allow-Origin', '*');
     console.log(req.files);
-    
     res.end('ok');
 })
 

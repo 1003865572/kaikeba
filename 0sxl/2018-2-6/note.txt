@@ -17,11 +17,11 @@
 
 4. 退拽事件 都有哪些， 以及对这些事件的理解
     ondragenter 拖动文件 移入节点
-    ondraglive  拖动文件 移除节点
+    ondraglive  拖动文件 移出节点
     ondragover  拖动文件 移入节点，没有松手之前， 需要阻止默认事件
         return false;
         ev.preventDefault();
-    ondrop      
+    ondrop
         拖动文件 移入节点，松手 需要阻止默认事件
         return false;
         ev.preventDefault();

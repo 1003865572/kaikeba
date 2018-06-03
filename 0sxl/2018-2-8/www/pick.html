@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * { margin: 0; padding: 0; list-style: none; }
+        #oBox{
+            width: 500px;
+            height: 300px;
+            background: #ccc;
+            border: 1px solid #000;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+        ul{
+            display: flex;
+        }
+        ul li {
+            position: relative;
+            margin: 10px;
+        }
+        ul li a{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #fff;
+            cursor: pointer;
+        }
+        ul li img{
+            width: 200px;
+            height: auto;
+            border: 1px solid #000;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oBox = document.getElementById('oBox');
+            var oUl = document.querySelector('#oUl');
+            var submit = document.querySelector('#submit');
+
+            let timer = null
+            document.addEventListener('dragover', function (ev) {
+                ev.preventDefault();
+                oBox.style.display = 'block';
+                clearTimeout(timer)
+                timer = setTimeout(function() {
+                    oBox.style.display = 'none';
+                }, 300)
+            }, false)
+            
+            oBox.addEventListener('dragenter', function (ev) {
+                oBox.innerHTML = 'in oBox';
+                ev.preventDefault();
+            }, false)
+
+            oBox.addEventListener('dragleave', function(ev) {
+                ev.preventDefault();
+                oBox.innerHTML = 'leave oBox';
+            }, false)
+            
+            oBox.addEventListener('drop', function (ev) { 
+                ev.preventDefault();
+                oUl.innerHTML = '';
+                Array.from(ev.dataTransfer.files).forEach(file => {
+                    let oLi = document.createElement('li');
+                    let reader = new FileReader();
+                    oLi.file = file;
+                    oLi.innerHTML = `<img src="" /><a htef="javascript:;">delete</a>`;
+                    let delBtn = oLi.querySelector('a');
+                    delBtn.onclick = function () {
+                        oUl.removeChild(oLi);
+                    }
+                    reader.onload = function () {
+                        let img = oLi.querySelector('img');
+                        img.src = this.result;
+                    }
+                    reader.readAsDataURL(file);
+                    oUl.appendChild(oLi);
+                })
+            }, false)
+            
+            submit.onclick = function () {
+                console.log(oUl.children);
+                let data = new FormData();
+                Array.from(oUl.children).forEach(li => {
+                    data.append('fl', li.file)
+                })
+                let xhr = new XMLHttpRequest();
+                xhr.upload.onprogress = function (ev) {
+                    console.log((ev.loaded / ev.total) * 100);
+                }
+                xhr.open('POST', 'http:localhost:8080/api')
+                xhr.send(data);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if ((xhr.status <= 200 && xhr.status < 300) || xhr.status === 304) {
+                            alert('upload success')
+                        } else {
+                            alert('upload fail')
+                        }
+                    }
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+    
+    <div id="oBox"></div>
+
+    <ul id="oUl">
+        
+    </ul>
+    <button id="submit" >submit</button>
+</body>
+</html>
