@@ -11,14 +11,83 @@
         }
         oW.postMessage() //向 进程通信
 2.文件操作， 拖拽事件
+    dragover    拖动文件悬浮dom之上时（会一直执行）
+    dragleave   拖动文件离开
+    dragenter   拖动松开时（实现拖文件上传功能时，必须禁止默认行为。不然不能触发 drop   ）
+    drop        拖动松开时，并且得是有效目标（比如在组件内部打开）也要阻止默认行为
 3.manifest
+    manifest 文件需要配置正确的 MIME-type (其实就是 response headers )，即 "text/cache-manifest"。必须在 web 服务器上进行配置。
+
+    File: index.html
+
+    <!DOCTYPE HTML>
+    <html manifest="demo.appcache">
+    ...
+    </html>
+
+    File: demo.appcache
+        manifest 文件分为三个部分
+        CACHE MANIFEST  需要缓存哪些文件
+        NETWORK         不需要缓存哪些文件
+        FALLBACK        让某些页面无法访问时的 默认页面 比如 404
+        # 开头的是注释
+
+    CACHE MANIFEST
+    /theme.css
+    /logo.gif
+    /main.js
+
+    NETWORK:
+    login.php
+    *   
+        #login.php 不会被缓存
+        #* 表示其他的都不会被缓存
+
+    FALLBACK:
+    /html/ /offline.html
+
 4.调用手机 陀螺仪
+    window.DeviceOrientationEvent
+    window.addEventListener("deviceorientation", this.handleOrientation, true);  
 5.sharedWork
-6.如何获取浏览器 内核信息
-7.canvas 基本操作
+    let sw = new SharedWork('js 文件路径')
+    sw.onMessage = function (ev) {
+        ev.data
+    }
+    sw.postMessage({})
+
+    sharedWebSocket.js
+
+6. server-sent
+
+    if (EventSource) {
+        let eventSource = new EventSource('http://localhost:8080/eventSource');
+        eventSource.onmessage = (ev) => {
+            ev
+        }
+    }
+    
+    服务端
+        setHeader   Content-type: text/event-stream
+
+        <?php 
+            header('Content-Type: text/event-stream'); 
+            header('Cache-Control: no-cache'); 
+
+            $time = date('r'); 
+            echo "data: The server time is: {$time}\n\n"; 
+            flush(); 
+        ?>
+
+7.如何获取浏览器 内核信息
+    window.navigator.userAgent
+8.canvas 基本操作
     getContext('2d') 获取到 canvas 2d 的操作对象
     moveTo(x,y) 开始画线前，要先找准下笔的位置
     lineTo(x,y) 开始绘制路径，但是没有颜色。
     closePath() 在计算机逻辑中 闭合路径
     stroke()    描线
     fill()      填充颜色
+9. localStorage
+    localStorage.a = 123
+    console.log(localStorage.a) // 123
