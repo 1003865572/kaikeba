@@ -29,7 +29,7 @@ HTTP 状态码
 
             2.实现 Servlet 接口 并实现 Servlet 中所有方法
                 主要方法介绍：
-                    1.public void init(ServletConfig config) throws ServletException 
+                    1.public void init(ServletConfig config) throws ServletException
                         Servlet 的初始化方法 在servlet 生命周期中第一次创建时调用，并且在Servlet 生命周期中只会被调用一次
 
                     2. public ServletConfig getServletConfig()
@@ -73,5 +73,28 @@ HTTP 状态码
                     销毁时调用
 
         基于Servlet 的文件上传
+            继承 HttpServlet 类，在 doPost 方法中进行上传文件的操作
 
+                1. DiskFileItemFactory factory = new DiskFileItemFactory();
+                        创建 此工厂类，此类是配置上传参数的工厂类。此工厂类需要设置两个个参数。内存临界值 / 临时目录位置 
+                    factory.setSizeThreshold(int x);
+                        设置内存临界值，超过后将产生临时文件，并存储与临时目录中
+                    factory.setRepository(String dir);
+                        设置临时目录
+
+                2. ServletFileUpload upload = new ServletFileUpload(factory);
+                        根据 DiskFileItemFactory 类 创建 ServletFileUpload 实例。此类需要设置三个参数。 文件上传最大值 / 最大请求值（指整个form的数据）/ HeaderEncoding （UTF-8）处理中文
+
+                    upload.setFileSizeMax(int FileMax);
+                        设置文件大小
+                    upload.setSizeMax(int FormMax)
+                        设置请求大小
+                    upload.setHeaderEncoding('UTF-8')
+                        中文处理
+                3. 创建 upload 文件夹 	File uploadDir = new File(uploadPath);
+
+
+
+
+                
         基于Servlet 的文件下载
