@@ -1,4 +1,59 @@
+﻿transform-style:    设置文档布局的方式( 必须定义在父及 )
+perspective:        透视
+rotate:             空间旋转XYZ
+translate:          空间坐标移动
+
+
+
+
 transform-style:    设置文档布局的方式( 必须定义在父及 )
 perspective:        透视
 rotate:             空间旋转XYZ
 translate:          空间坐标移动
+```
+十个问题
+    1. flex: 1 的情况下还是可以使用max-width, min-width
+    2. flex: 1 的情况下 margin 失效
+    3. 详细讲述 flex 布局
+        
+        在 flex 盒子中 width, height 是无效的, 但是 max-width, min-wdth, max-height, min-height 则有效
+
+        [flex-direction 排序方式]
+            row  横向排列: 右对齐并且内容翻转
+            row-reverse 横向排列: 左对齐
+            colume  纵向排列: 上对齐
+            colume-reverse 纵向排列: 下对齐并且内容翻转
+        [justify-content 对齐方式], 对齐布局的方向为, flex-direction 的值
+            flex-start      默认值, 浏览器默认排序方法
+            flex-end        flex-direction: row, 时内容从右往左排序, flex-direction: colume 时, 内容从下往上排序
+            center          居中
+            space-betwwen   评价分配空白的地方( 开始的和结束的元素都是挨着边的 )
+            space-around    保证所有元素两边的空白都是一样的
+        [align-items 排列方式], flex-direction 的值的相反面(row 相反于 colume)
+            flex-start      纵轴的**开始**方向对齐
+            flex-end        纵轴的**结束**方向对齐
+            center          纵轴的中间
+            baseline        等同于 flex-start
+            stretch         纵轴自动, 如果子元素的 height: auto 那么会填满纵轴
+        [flex-wrap 换行方式]
+            nowrap          默认
+            wrap            子元素的宽度为 width, 而不是 flex.  内容多行, 溢出换行
+            wrap-reverse    换行规则翻转
+        [align-content 在多行的情况下是如何对齐的]
+            stretch         默认值
+            flex-start      默认值, 其实位置堆叠
+            flex-end        从结束位置堆叠
+            center          多行都挤在中间
+            space-between   多行均分空间
+            space-around    多行上下的所占用的空间是一样的
+        [order 为子元素定义排序]
+            int 整型, 可以为负数. 让用户自定义子元素的排序顺序
+        [margin: auto 让子元素自动获取剩下的空间]
+        [align-self 设置子元素自己在flex 盒子中的对齐方式]
+            auto    默认值, 继承父级的, align-items, 如果父级没有 align-items, 则为 stretch ( 纵轴充满整个 盒子 )
+            同 align-items
+        [flex: 描述子元素在盒子中所占有的空间比例]
+            int 整型, 最小为0
+```
+    4. 淘宝 H5 的兼容处理
+    5. 使用 SharedWorker 实现多页面通信

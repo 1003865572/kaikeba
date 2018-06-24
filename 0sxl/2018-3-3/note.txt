@@ -1,0 +1,12 @@
+10. 个问题
+1. css3d
+    1.首先 parent节点需要支持 3d
+        transform-style: preserve-3d (只能作用于 子级 一级)
+    2. 子节点才能使用 transform: translateZ(100px) 控制Z轴
+    3. transform: perspective(700px)  perspective 来设置3d的透视， 相当于你站在多远来看一个 箱子的样子
+
+2. flex 布局
+3. 栅格布局
+4. 不用 flex 实现 纵向居中的 几个方法
+5. 实现 左侧 菜单栏布局
+6. 渐变

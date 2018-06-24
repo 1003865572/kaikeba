@@ -9,17 +9,24 @@
 <body>
     <script>
         window.onload = () => {
-            let xhr = XMLHttpRequest();
-            let data = new FormData();
-            data.set('user', '123');
-            data.set('pass', 456);
-            
-            xhr.open('POST', 'http://localhost:8080/api');
-            xhr.send()
+            // let xhr = new XMLHttpRequest();
+            // let data = new FormData();
+            // data.set('user', '123');
+            // data.set('pass', 456);
+            // xhr.open('POST', 'http://localhost:8080/api');
+            // xhr.setRequestHeader('Content-type', 'multipart/form-data')
+            // xhr.send()
+            // xhr.onreadystatechange = function () {
+            //     if (xhr.readyState === '4') {
+            //         console.log(xhr.status);
+            //     }
+            // }
         }
     </script>
     <form action="http://localhost:8080/" method="POST" enctype="multipart/form-data">
-        <input type="file" name="fl" ><br />
+        <input type="text" name="user" value="2" ><br />
+        <input type="text" name="pass" value="3" ><br />
+        <input type="file" name="fl" value="1" ><br />
         <input type="submit" value="提交">
     </form>
 </body>

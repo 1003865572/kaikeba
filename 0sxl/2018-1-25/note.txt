@@ -6,6 +6,7 @@
 
 
 
+------------------------------------------------------
 ------WebKitFormBoundaryTIFfBGEySMLfAABn
 Content-Disposition: form-data; name="user"
 
@@ -18,7 +19,38 @@ pass2
 Content-Disposition: form-data; name="fl"; filename="note.txt"
 Content-Type: text/plain
 
-------------------------------------------------
-10 个问题
-1. get 请求为什么也能触发 request.on('end', () => {}) 函数
+321
 ------WebKitFormBoundaryTIFfBGEySMLfAABn--
+
+------------------------------------------------------
+<split>
+Content-Disposition: form-data; name="user"
+
+user1
+<split>
+Content-Disposition: form-data; name="pass"
+
+pass2
+<split>
+Content-Disposition: form-data; name="fl"; filename="note.txt"
+Content-Type: text/plain
+
+321
+<split>--
+
+
+------------------------------------------------------
+<split>
+Content-Disposition: form-data; name="user"
+
+user1
+<split>
+Content-Disposition: form-data; name="pass"
+
+pass2
+<split>
+Content-Disposition: form-data; name="fl"; filename="note.txt"
+Content-Type: text/plain
+
+321
+<split>--
