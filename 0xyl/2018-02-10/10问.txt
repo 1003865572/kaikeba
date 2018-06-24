@@ -1,12 +1,52 @@
-1.localStore 使用方法
+1. localStore 使用方法
+    localStore 最大5M
     localStore 工作在域名下，每个域名都有单独的 localStore，域名之间不可共享
     localStore.keys 获取所有的 key
     delete localStore.key 删除 制定的 key 以及下面的值
 
-2.浏览器获取位置：geolocation
+2. 浏览器获取位置：geolocation
+    navigator.geolocation.getCurrentPosition 通过此方法可获取到 坐标轴
 
-3.Cookies 介绍
+3. Cookies 介绍
+    cookies 是前端与服务端共享的数据，
+    cookies 大小只有4K,存储的数据非常有限
+    在Http中 Cookies 是明文传输的，不安全
 
-4.WebWorkers js多进程
+4. WebWorkers js多进程
+    let oW=new Worker('1.js');
+    oW.onmessage = function(){};
+    oW.postMessage(object);
 
-5.
+    WebWorkers 使用 new 关键字创建，创建时需要给它一个 js文件的 url，
+    WebWorkers 两个关键的 方法
+        -| onmessage 当另一个进程发送数据时执行此方法
+        -| postMessage 向另一个进程发送数据
+    WebWorkers 不能进行 UI 操作，只能进行数据操作
+
+5. canvas 相关问题
+    canvas 执行js代码
+
+    gc.moveTo(100, 150);
+    gc.lineTo(325, 210);
+
+    gc.stroke();  画线
+
+    gc.fill(); 填充块
+
+    stroke 方法必须在 lineTo 方法之后执行
+
+6. canvas 宽高只能在 标签内定义
+
+
+7. geolocation 使用
+    geolocation 是在 navigator 对象下获取的
+    navigator.geolocation.getCurrentPosition 通过此方法可获取到 坐标轴
+
+    window.navigator.geolocation.getCurrentPosition(function(res){
+        console.log(res.coords.latitude);
+        console.log(res.coords.longitude);
+    });
+8. mysql view
+    view 多表联合 拼装的一个 视图，只能查看，不能做操作，
+    （前提：autoCommit = 0）select 也是有事务的，每次 select 之前 最好加上commit
+        commit; select * from table

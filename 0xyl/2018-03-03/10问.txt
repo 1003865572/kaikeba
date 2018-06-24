@@ -1,0 +1,11 @@
+---------- css3 transfrom 相关问题 ---------
+
+1. 给父级设置保持3D 状态
+    transfrom-style: preserve-3d; 父级保持3D状态 就不限制子集在Z轴上下移动
+
+2. transfrom 透视（景深）
+    perspective: 20px; 与 transfrom配合使用，使3D效果更加真实
+
+3. transform 可操作属性
+    rotate 旋转 translate 位移
+    在使用 transform 做动效时，要先定义，旋转/位移的初始值，在css伪类中 设置 需要元素改变的属性

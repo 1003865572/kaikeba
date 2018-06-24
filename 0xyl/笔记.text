@@ -10,3 +10,119 @@ HTTP 状态码
     302：临时重定向
 4xx
 5xx
+
+-------------------------------------------------------------- JAVA 相关 ------------------------------------------------------------------------------
+
+    Servlet 复习
+        java代码实现Servlet的几种方式
+            java 实现 Servlet 需要添加 jar 包 javax.servlet-api 
+            1.继承 javax.servlet-api  包中的 HttpServlet 类
+
+                1.其中 public void init() throws ServletException 方法是Servlet 的初始化方法，在Servlet生命周期中只会被调用一次
+
+                2.public void destroy() 是Servlet 销毁是调用的方法
+
+                3.public void doGet(HttpServletRequest request,
+                    HttpServletResponse response) throws ServletException, IOException
+
+                此方法实现了 GET 请求，需要在子类中重写此方法。同样的 要实现POST请求，HttpServlet 类中也有对应的 doPOST 方法 以及其他的请求方式等等
+
+            2.实现 Servlet 接口 并实现 Servlet 中所有方法
+                主要方法介绍：
+                    1.public void init(ServletConfig config) throws ServletException
+                        Servlet 的初始化方法 在servlet 生命周期中第一次创建时调用，并且在Servlet 生命周期中只会被调用一次
+
+                    2. public ServletConfig getServletConfig()
+                        此方法返回 ServletConfig 实例   
+                        生命周期方法:对客户端响应的方法,该方法会被执行多次，每次请求该servlet都会执行该方法  
+
+                    3.public void service(ServletRequest req, ServletResponse res)
+			            throws ServletException, IOException 
+
+                        客户端请求时，做出响应的方法。此方法名比较特殊是 service 所以它可以响应客户端任意方式的请求【GET/POST/PUT/DELETE.....】
+                        在Servlet生命周期中，会被调用多次，
+
+                    4. public String getServletInfo()
+                        生命周期方法:当Servlet被销毁前执行该方法
+
+                    5. public void destroy()
+                        生命周期方法:当Servlet被【销毁】时执行该方法
+            以上说的是代码层面的实现，下面说说配置文件 web.xml
+                在 web.xml 中配置Servlet
+                    首先要写上两个标签 <servlet> 和  <servlet-mapping>
+                        <servlet> 标签下 有两个子标签， <servlet-name> 定义了Servlet的名字 <servlet-class>指向 Servlet 对应的类
+                        <servlet-mapping>下有两个子标签 <servlet-name> 对应上面 <servlet> 定义的 Name <url-pattern> 定义客户端的请求路径
+
+            Servlet的生命周期：
+                Servlet 被第一次访问的时候创建 并调用 他的 init 方法
+                    此后客户端每次访问，都会开启一个线程 并将请求交给相对应得方法进行处理
+                    当 WEB 容器重启，或者关闭时，Servlet 将会调用 destory 方法 执行销毁前的操作
+        
+        基于Servlet 的 过滤器 【LogFilter】。过滤器的作用：客户端请求/服务端相应时，对数据进行拦截并进行处理
+            
+            代码层面：实现 javax.servlet 包下的 Filter 接口 并且实现包中的方法，下面进行 方法介绍
+
+                1. public void init(FilterConfig config) throws ServletException
+                    初始化方法，随 WEB 容器启动时执行
+
+                2. public void doFilter(ServletRequest request, ServletResponse response,
+			            FilterChain chain) throws IOException, ServletException
+                    客户端请求时做出响应的方法，在客户端 请求，或者服务器响应时，拦截并加以处理
+                
+                3. public void destroy()
+                    销毁时调用
+
+        基于Servlet 的文件上传
+            继承 HttpServlet 类，在 doPost 方法中进行上传文件的操作
+
+                1. DiskFileItemFactory factory = new DiskFileItemFactory();
+                        创建 此工厂类，此类是配置上传参数的工厂类。此工厂类需要设置两个个参数。内存临界值 / 临时目录位置 
+                    factory.setSizeThreshold(int x);
+                        设置内存临界值，超过后将产生临时文件，并存储与临时目录中
+                    factory.setRepository(String dir);
+                        设置临时目录
+
+                2. ServletFileUpload upload = new ServletFileUpload(factory); //上传文件类
+                        根据 DiskFileItemFactory 类 创建 ServletFileUpload 实例。此类需要设置三个参数。 文件上传最大值 / 最大请求值（指整个form的数据）/ HeaderEncoding （UTF-8）处理中文
+
+                    upload.setFileSizeMax(int FileMax);
+                        设置文件大小
+                    upload.setSizeMax(int FormMax)
+                        设置请求大小
+                    upload.setHeaderEncoding('UTF-8')
+                        中文处理
+                3. 创建 upload 文件夹 ，上传完成的文件 都会放在此文件加中
+                    File uploadDir = new File(uploadPath);
+
+                4.使用 ServletFileUpload 类获取上传文件的集合
+                    List<FileItem> items = upload.parseRequest(HttpServletRequest);
+
+                5. 通过上面的步骤获取到了 FileItem 对象，下面就来保存下这些个对象
+
+                    //创建一个 File 对象
+                    File storeFile = new File( uploadPath + fileName = filePath );
+                    //保存
+                    FileItem.write(storeFile);
+                
+        基于Servlet 的文件下载
+                1. 继承 HttpServlet 类 重写父类方法 doGet
+                2. 在doGet方法中获取下载文件的 名字
+                    String fileName = request.getParameter("name");
+                3. 设置请求头，以及 ContentType
+                    response.setContentType(getServletContext().getMimeType(fileName));
+                    response.setHeader("Content-Disposition", "attachment;filename="+fileName);
+                4. 获取文件位置
+                    ServletContext context = this.getServletContext();
+		            String fullFileName = context.getRealPath("/download/"+fileName);
+                5. 创建输入流和输出流
+                    InputStream is = new FileInputStream(fullFileName);
+                    ServletOutputStream os = response.getOutputStream();
+                6. 发送数据
+                    
+                    int len = -1;
+                    byte[] b = new byte[1024];
+                    while((len = is.read(b)) != -1){
+                        os.write(b, 0 ,len);
+                    }
+                    is.close();
+                    os.close();
